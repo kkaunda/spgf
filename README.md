@@ -11,25 +11,37 @@
 ![](vertopal_bfea56392a264e1da44fa95b98b2549d/media/image2.jpeg)
 
 import Mathlib.Data.Nat.Prime.Basic
+
 import data.set.basic
+
 import algebra.group.defs
 
 open int
 
 -- Define the set of all primes (ℤ is used to include additive inverses)
+
 def is_prime (z : ℤ) : Prop := nat.prime z.nat_abs
 
 -- Define the Cayley table T as a function from pairs of primes and their inverses to ℤ
+
 def T (p q : ℤ) (hp : is_prime p) (hq : is_prime q) : ℤ :=
+
   if (0 < p ∧ 0 < q) then p + (-q) else 0
 
 -- Example usage: proving that T respects commutativity in the prime groupoid
+
 example (p q : ℤ) (hp : is_prime p) (hq : is_prime q) : T p q hp hq = T q p hq hp :=
+
 begin
+
   unfold T,
+
   split_ifs,
+
   { simp [add_comm] },
+
   { refl },
+
 End
 
 # **Structure in Prime Gaps -- Formalized**
@@ -114,16 +126,16 @@ presents two main results the first of which is the claim that there
 exist structured gaps between primes and the second result is basically
 a corollary or special case of the first. These are stated as follows:
 
-**Theorem 1**: For every prime *p*$_α$, there exists infinitely many
-pairs of primes, (*p*`_n`, *p*<sub>n+m</sub>), such that (*p*~n+m~ − *p*~n~) =
-*p*~α~ − 3, where *n*, *α* ≥ 3, *m* ≥ 1, and *p*~n~ is the *n*^th^
+**Theorem 1**: For every prime *p*<sub>α</sub>, there exists infinitely many
+pairs of primes, (*p*<sub>n</sub>, *p*<sub>n+m</sub>), such that (*p*<sub>n+m</sub> − *p*<sub>n</sub>) =
+*p*<sub>α</sub> − 3, where *n*, *α* ≥ 3, *m* ≥ 1, and *p*<sub>n</sub> is the *n*<sup>th</sup>
 prime.
 
 **Theorem 2**: There exist infinitely many pairs of primes with a gap of
 2.
 
-**A brief visual overview of the results presented in the article
-*Structure in Prime Gaps***
+## **A brief visual overview of the results presented in the article
+## *Structure in Prime Gaps***
 
 The following partial Cayley table *T* represents gaps between primes in
 which the results we are formalizing are visually *self-evident*.
@@ -135,18 +147,18 @@ from which **Theorem 2** is implied as seen in Table 3.
 
 -   Each pattern is defined and identified by the 4-tuple *β =* (*A, B,
     L, E*) formed from the elements in the vertices of a sub-array
-    *T*~i~ of *T*. In Table 2, the first 4-tuple *β =* (*A, B, L, E*)
+    *T*<sub>i</sub> of *T*. In Table 2, the first 4-tuple *β =* (*A, B, L, E*)
     for prime 23 is *β =* (20, 28, 12, 20).
 
--   Every sub-array *TT*~i~, defines two pairs of primes. In Table 2,
-    the *First pair* is (3, *p*~α~) or (3, 23) and the *Second pair* is
+-   Every sub-array *TT*<sub>i</sub>, defines two pairs of primes. In Table 2,
+    the *First pair* is (3, *p*<sub>α</sub>) or (3, 23) and the *Second pair* is
     (((*B* + 3) + 0 -- *E*), (*B* + 3)) or (11, 31). We can denote the
-    integers 11 and 31 in the *Second pair* using the variables *Q*~i~
-    and *R*~i~ respectively.
+    integers 11 and 31 in the *Second pair* using the variables *Q*<sub>i</sub>
+    and *R*<sub>i</sub> respectively.
 
 -   The *First pair* remains constant for all patterns related to any
-    prime *p*~α~ ≥ 5. Subsequent *Second pairs* are unique for each
-    sub-array *TT*~i~ of *T*.
+    prime *p*<sub>α</sub> ≥ 5. Subsequent *Second pairs* are unique for each
+    sub-array *TT*<sub>i</sub> of *T*.
 
 -   *L* is always congruent to 0 mod 6.
 
@@ -159,7 +171,7 @@ from which **Theorem 2** is implied as seen in Table 3.
 -   **Table 2:** Highlights patterns where the 4-tuple *β* = (*A, B, L,
     E*) defines each pattern, with specific examples provided. The
     "Pattern" here is more elaborately defined in the sense that it
-    consists of integers other than just *Q*~i~ and *R*~i~.
+    consists of integers other than just *Q*<sub>i</sub> and *R*<sub>i</sub>.
 
 -   **Table 3:** Demonstrates the implication of results derived from
     the patterns observed in Table 2.
@@ -171,23 +183,20 @@ from which **Theorem 2** is implied as seen in Table 3.
 
 **Table 1**
 
-![](vertopal_bfea56392a264e1da44fa95b98b2549d/media/image3.jpeg){width="6.5in"
-height="3.486609798775153in"}
+![](vertopal_bfea56392a264e1da44fa95b98b2549d/media/image3.jpeg)
 
 **Table Legend**
 
-![](vertopal_bfea56392a264e1da44fa95b98b2549d/media/image4.jpeg){width="1.042361111111111in"
-height="0.6604166666666667in"}
+![](vertopal_bfea56392a264e1da44fa95b98b2549d/media/image4.jpeg)
 
 **Table 2**
 
-![](vertopal_bfea56392a264e1da44fa95b98b2549d/media/image5.jpeg){width="6.5in"
-height="3.4918722659667543in"}
+![](vertopal_bfea56392a264e1da44fa95b98b2549d/media/image5.jpeg)
+
 
 **Table 3**
 
-![](vertopal_bfea56392a264e1da44fa95b98b2549d/media/image6.jpeg){width="6.5in"
-height="3.486609798775153in"}
+![](vertopal_bfea56392a264e1da44fa95b98b2549d/media/image6.jpeg)
 
 **Formalization Strategy**
 
@@ -220,9 +229,6 @@ In addition to this document, we also provide the following:
 -   **Formalization Repository**: a link to a GitHub repository of the
     formalization.
 
-```{=html}
-<!-- -->
-```
 -   **Website**: We will host it using the simple and free "Github
     Pages" facility.
 
@@ -248,8 +254,8 @@ additive inverses.
 
 **Notes**
 
-The set *J* is defined as follows *J* = (\...,−*p*~n+2~, −*p*~n+1~,
-−*p*~n~, *p*~n~, p~n+1~, *p*~n+2~, \...). Notice that since primes are
+The set *J* is defined as follows *J* = (\...,−*p*<sub>n+2</sub>, −*p*<sub>n+1</sub>,
+−*p*<sub>n</sub>, *p*<sub>n</sub>, p<sub>n+1</sub>, *p*<sub>n+2</sub>, \...). Notice that since primes are
 infinite then by definition the structure T is also infinite. Ideally,
 the proof structures used by LEAN4 must reflect this property rather
 than relying on the proof not depending on this property being
