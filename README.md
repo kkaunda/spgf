@@ -297,7 +297,7 @@ Definition 2.
 Definition 2 defines a sub-array which is later used to algebraically
 construct a pattern.
 
-`Example: *TT*$_1$ = ((2, 4, 8, 10), (0, 2, 6, 8), (-2, 0, 4, 6), (-6, -4, 0, 2)).`
+`Example: *TT*_1 = ((2, 4, 8, 10), (0, 2, 6, 8), (-2, 0, 4, 6), (-6, -4, 0, 2)).`
 
 **LEAN4 code**
 
