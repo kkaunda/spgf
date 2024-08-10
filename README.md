@@ -2,12 +2,11 @@
 
 ## PROJECT PROPOSAL
 
+## prepared for: \https://leanprover.zulipchat.com/
+
+## prepared by: \KAJANI KAUNDA
+
 ![](vertopal_bfea56392a264e1da44fa95b98b2549d/media/image1.png)
-{width="4.37373687664042in" height="5.288116797900263in"}
-
-prepared for: \https://leanprover.zulipchat.com/
-
-prepared by: \KAJANI KAUNDA
 
 ![](vertopal_bfea56392a264e1da44fa95b98b2549d/media/image2.jpeg)
 
@@ -115,7 +114,7 @@ presents two main results the first of which is the claim that there
 exist structured gaps between primes and the second result is basically
 a corollary or special case of the first. These are stated as follows:
 
-**Theorem 1**: For every prime *p*~α~, there exists infinitely many
+**Theorem 1**: For every prime *p*$$_α$$, there exists infinitely many
 pairs of primes, (*p*~n~, *p*~n+m~), such that (*p*~n+m~ − *p*~n~) =
 *p*~α~ − 3, where *n*, *α* ≥ 3, *m* ≥ 1, and *p*~n~ is the *n*^th^
 prime.
