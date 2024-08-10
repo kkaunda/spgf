@@ -10,39 +10,34 @@
 
 ![](vertopal_bfea56392a264e1da44fa95b98b2549d/media/image2.jpeg)
 
-import Mathlib.Data.Nat.Prime.Basic
-
-import data.set.basic
-
-import algebra.group.defs
-
-open int
-
--- Define the set of all primes (ℤ is used to include additive inverses)
-
-def is_prime (z : ℤ) : Prop := nat.prime z.nat_abs
-
--- Define the Cayley table T as a function from pairs of primes and their inverses to ℤ
-
-def T (p q : ℤ) (hp : is_prime p) (hq : is_prime q) : ℤ :=
-
-  if (0 < p ∧ 0 < q) then p + (-q) else 0
-
--- Example usage: proving that T respects commutativity in the prime groupoid
-
-example (p q : ℤ) (hp : is_prime p) (hq : is_prime q) : T p q hp hq = T q p hq hp :=
-
-begin
-
-  unfold T,
-
-  split_ifs,
-
-  { simp [add_comm] },
-
-  { refl },
-
-End
+> import Mathlib.Data.Nat.Prime.Basic
+>
+> import data.set.basic
+>
+> import algebra.group.defs
+>
+> open int
+>
+> -- Define the set of all primes (ℤ is used to include additive inverses)
+>
+> def is_prime (z : ℤ) : Prop := nat.prime z.nat_abs
+>
+> -- Define the Cayley table T as a function from pairs of primes and their inverses to ℤ
+>
+> def T (p q : ℤ) (hp : is_prime p) (hq : is_prime q) : ℤ :=
+>
+>   if (0 < p ∧ 0 < q) then p + (-q) else 0
+>
+> -- Example usage: proving that T respects commutativity in the prime groupoid
+>
+> example (p q : ℤ) (hp : is_prime p) (hq : is_prime q) : T p q hp hq = T q p hq hp :=
+>
+> begin
+>   unfold T,
+>   split_ifs,
+>   { simp [add_comm] },
+>   { refl },
+> End
 
 # **Structure in Prime Gaps -- Formalized**
 
@@ -422,7 +417,7 @@ Lemma 4.3. this is the third Lemma.
 
 **Formal statement**
 
-**Lemma 4.3**: Let *t*~m,n~ be a term in *T* where the indexes *m* and
+**Lemma 4.3**: Let *t*<sub>m,n</sub> be a term in *T* where the indexes *m* and
 *n* are zero based and refer to the rows and columns in *T*
 respectively.
 
