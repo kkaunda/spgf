@@ -134,7 +134,7 @@ prime.
 **Theorem 2**: There exist infinitely many pairs of primes with a gap of
 2.
 
-## **A brief visual overview of the results presented in the article *Structure in Prime Gaps* **
+## A brief visual overview of the results presented in the article *Structure in Prime Gaps*
 
 The following partial Cayley table *T* represents gaps between primes in
 which the results we are formalizing are visually *self-evident*.
