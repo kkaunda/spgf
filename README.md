@@ -2,15 +2,14 @@
 
 ## PROJECT PROPOSAL
 
-![](vertopal_bfea56392a264e1da44fa95b98b2549d/media/image1.png){width="4.37373687664042in"
-height="5.288116797900263in"}
+![](vertopal_bfea56392a264e1da44fa95b98b2549d/media/image1.png)
+{width="4.37373687664042in" height="5.288116797900263in"}
 
 prepared for: \https://leanprover.zulipchat.com/
 
 prepared by: \KAJANI KAUNDA
 
-![](vertopal_bfea56392a264e1da44fa95b98b2549d/media/image2.jpeg){width="4.929432414698162in"
-height="3.697075678040245in"}
+![](vertopal_bfea56392a264e1da44fa95b98b2549d/media/image2.jpeg)
 
 import Mathlib.Data.Nat.Prime.Basic
 import data.set.basic
