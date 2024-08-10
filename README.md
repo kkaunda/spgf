@@ -46,15 +46,12 @@
 
 ```
 import Mathlib.Data.Nat.Prime.Basic
-
 import data.set.basic
-
 import algebra.group.defs
 
 open int
 
 -- Define the set of all primes (ℤ is used to include additive inverses)
-
 def is_prime (z : ℤ) : Prop := nat.prime z.nat_abs
 
 -- Define the Cayley table T as a function from pairs of primes and their inverses to ℤ
