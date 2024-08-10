@@ -1,72 +1,51 @@
-STRUCTURE IN PRIME GAPS - FORMALIZED
+# STRUCTURE IN PRIME GAPS - FORMALIZED
 
-PROJECT PROPOSAL
+## PROJECT PROPOSAL
 
 ![](vertopal_bfea56392a264e1da44fa95b98b2549d/media/image1.png){width="4.37373687664042in"
 height="5.288116797900263in"}
 
-prepared for\
-https://leanprover.zulipchat.com/
+prepared for: \https://leanprover.zulipchat.com/
 
-prepared by\
-KAJANI KAUNDA
+prepared by: \KAJANI KAUNDA
 
 ![](vertopal_bfea56392a264e1da44fa95b98b2549d/media/image2.jpeg){width="4.929432414698162in"
 height="3.697075678040245in"}
 
-+-----------------------------------------------------------------------+
-| import data.nat.prime                                                 |
-|                                                                       |
-| import data.set.basic                                                 |
-|                                                                       |
-| import algebra.group.defs                                             |
-|                                                                       |
-| open int                                                              |
-|                                                                       |
-| \-- Define the set of all primes (ℤ is used to include additive       |
-| inverses)                                                             |
-|                                                                       |
-| def is_prime (z : ℤ) : Prop := nat.prime z.nat_abs                    |
-|                                                                       |
-| \-- Define the Cayley table T as a function from pairs of primes and  |
-| their inverses to ℤ                                                   |
-|                                                                       |
-| def T (p q : ℤ) (hp : is_prime p) (hq : is_prime q) : ℤ :=            |
-|                                                                       |
-| if (0 \< p ∧ 0 \< q) then p + (-q) else 0                             |
-|                                                                       |
-| \-- Example usage: proving that T respects commutativity in the prime |
-| groupoid                                                              |
-|                                                                       |
-| example (p q : ℤ) (hp : is_prime p) (hq : is_prime q) : T p q hp hq = |
-| T q p hq hp :=                                                        |
-|                                                                       |
-| begin                                                                 |
-|                                                                       |
-| unfold T,                                                             |
-|                                                                       |
-| split_ifs,                                                            |
-|                                                                       |
-| { simp \[add_comm\] },                                                |
-|                                                                       |
-| { refl },                                                             |
-|                                                                       |
-| End                                                                   |
-+=======================================================================+
-+-----------------------------------------------------------------------+
+import Mathlib.Data.Nat.Prime.Basic
+import data.set.basic
+import algebra.group.defs
 
-**Structure in Prime Gaps -- Formalized**
+open int
 
-**By Kajani Kaunda, , , , , \... .**
+-- Define the set of all primes (ℤ is used to include additive inverses)
+def is_prime (z : ℤ) : Prop := nat.prime z.nat_abs
 
-**Abstract**
+-- Define the Cayley table T as a function from pairs of primes and their inverses to ℤ
+def T (p q : ℤ) (hp : is_prime p) (hq : is_prime q) : ℤ :=
+  if (0 < p ∧ 0 < q) then p + (-q) else 0
+
+-- Example usage: proving that T respects commutativity in the prime groupoid
+example (p q : ℤ) (hp : is_prime p) (hq : is_prime q) : T p q hp hq = T q p hq hp :=
+begin
+  unfold T,
+  split_ifs,
+  { simp [add_comm] },
+  { refl },
+End
+
+# **Structure in Prime Gaps -- Formalized**
+
+## **By Kajani Kaunda, , , , , \... .**
+
+## **Abstract**
 
 In this open community project, we formalize using the LEAN programming
 language, the definitions and results presented in the paper [*Structure
 in Prime
 Gaps*](https://www.researchsquare.com/article/rs-4058806/latest).
 
-**Introduction**
+## **Introduction**
 
 **Remark:** *In this paper, we will dispense with a lot of contextual
 explanations and restrict ourselves only to those which are pertinent to
@@ -194,22 +173,22 @@ from which **Theorem 2** is implied as seen in Table 3.
 
 **Table 1**
 
-![](vertopal_bfea56392a264e1da44fa95b98b2549d/media/image3.emf){width="6.5in"
+![](vertopal_bfea56392a264e1da44fa95b98b2549d/media/image3.jpeg){width="6.5in"
 height="3.486609798775153in"}
 
 **Table Legend**
 
-![](vertopal_bfea56392a264e1da44fa95b98b2549d/media/image4.emf){width="1.042361111111111in"
+![](vertopal_bfea56392a264e1da44fa95b98b2549d/media/image4.jpeg){width="1.042361111111111in"
 height="0.6604166666666667in"}
 
 **Table 2**
 
-![](vertopal_bfea56392a264e1da44fa95b98b2549d/media/image5.emf){width="6.5in"
+![](vertopal_bfea56392a264e1da44fa95b98b2549d/media/image5.jpeg){width="6.5in"
 height="3.4918722659667543in"}
 
 **Table 3**
 
-![](vertopal_bfea56392a264e1da44fa95b98b2549d/media/image6.emf){width="6.5in"
+![](vertopal_bfea56392a264e1da44fa95b98b2549d/media/image6.jpeg){width="6.5in"
 height="3.486609798775153in"}
 
 **Formalization Strategy**
@@ -281,76 +260,33 @@ of the prime involved.
 
 **LEAN4 code**
 
-+-----------------------------------------------------------------------+
-| import data.nat.prime                                                 |
-|                                                                       |
-| import data.set.basic                                                 |
-|                                                                       |
-| import algebra.group.defs                                             |
-|                                                                       |
-| open int                                                              |
-|                                                                       |
-| \-- Define the set of all primes (ℤ is used to include additive       |
-| inverses)                                                             |
-|                                                                       |
-| def is_prime (z : ℤ) : Prop := nat.prime z.nat_abs                    |
-|                                                                       |
-| \-- Define the Cayley table T as a function from pairs of primes and  |
-| their inverses to ℤ                                                   |
-|                                                                       |
-| def T (p q : ℤ) (hp : is_prime p) (hq : is_prime q) : ℤ :=            |
-|                                                                       |
-| if (0 \< p ∧ 0 \< q) then p + (-q) else 0                             |
-|                                                                       |
-| \-- Example usage: proving that T respects commutativity in the prime |
-| groupoid                                                              |
-|                                                                       |
-| example (p q : ℤ) (hp : is_prime p) (hq : is_prime q) : T p q hp hq = |
-| T q p hq hp :=                                                        |
-|                                                                       |
-| begin                                                                 |
-|                                                                       |
-| unfold T,                                                             |
-|                                                                       |
-| split_ifs,                                                            |
-|                                                                       |
-| { simp \[add_comm\] },                                                |
-|                                                                       |
-| { refl },                                                             |
-|                                                                       |
-| End                                                                   |
-+=======================================================================+
-+-----------------------------------------------------------------------+
+import Mathlib.Data.Nat.Prime.Basic
+import data.set.basic
+import algebra.group.defs
+
+open int
+
+-- Define the set of all primes (ℤ is used to include additive inverses)
+def is_prime (z : ℤ) : Prop := nat.prime z.nat_abs
+
+-- Define the Cayley table T as a function from pairs of primes and their inverses to ℤ
+def T (p q : ℤ) (hp : is_prime p) (hq : is_prime q) : ℤ :=
+  if (0 < p ∧ 0 < q) then p + (-q) else 0
+
+-- Example usage: proving that T respects commutativity in the prime groupoid
+example (p q : ℤ) (hp : is_prime p) (hq : is_prime q) : T p q hp hq = T q p hq hp :=
+begin
+  unfold T,
+  split_ifs,
+  { simp [add_comm] },
+  { refl },
+End
 
 **LEAN4 code annotation**
 
-+-----------------------------------------------------------------------+
-| **is_prime** : A predicate to check if a given integer z is a prime   |
-| number by considering its absolute value.                             |
-|                                                                       |
-| **T** : Defined as a function taking two integers *p* and *q* along   |
-| with proofs that they are prime. It computes *p* + (-*q*) if both *p* |
-| and *q* are positive, enforcing the required structure of the Cayley  |
-| table.                                                                |
-|                                                                       |
-| Example Proof : A simple proof to show the commutativity of the       |
-| addition operation in the context of the Cayley table.                |
-|                                                                       |
-| **Considerations:**                                                   |
-|                                                                       |
-| **Infiniteness** : The function *T* is defined for any integer pairs  |
-| that satisfy the prime condition, allowing it to handle infinitely    |
-| many primes.                                                          |
-|                                                                       |
-| **Proofs** : You can use *T* to perform and automate proofs involving |
-| the addition of primes and their inverses.                            |
-|                                                                       |
-| This structure allows you to use *T* in an infinite context, as LEAN  |
-| will work with the properties and proofs of primes dynamically,       |
-| rather than relying on a finite list.                                 |
-+=======================================================================+
-+-----------------------------------------------------------------------+
+  -----------------------------------------------------------------------
 
+  -----------------------------------------------------------------------
 **Item name**
 
 Definition 2.
