@@ -34,13 +34,13 @@
 >
 > begin
 >
->   unfold T,
+>     unfold T,
 >
->   split_ifs,
+>     split_ifs,
 >
->   { simp [add_comm] },
+>     { simp [add_comm] },
 >
->   { refl },
+>     { refl },
 >
 > End
 
