@@ -33,10 +33,15 @@
 > example (p q : ℤ) (hp : is_prime p) (hq : is_prime q) : T p q hp hq = T q p hq hp :=
 >
 > begin
+>
 >   unfold T,
+>
 >   split_ifs,
+>
 >   { simp [add_comm] },
+>
 >   { refl },
+>
 > End
 
 # **Structure in Prime Gaps -- Formalized**
