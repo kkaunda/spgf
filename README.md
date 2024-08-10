@@ -114,8 +114,8 @@ presents two main results the first of which is the claim that there
 exist structured gaps between primes and the second result is basically
 a corollary or special case of the first. These are stated as follows:
 
-**Theorem 1**: For every prime *p*$$_α$$, there exists infinitely many
-pairs of primes, (*p*~n~, *p*~n+m~), such that (*p*~n+m~ − *p*~n~) =
+**Theorem 1**: For every prime *p*$_α$, there exists infinitely many
+pairs of primes, (*p*`_n`, *p*<sub>n+m</sub>), such that (*p*~n+m~ − *p*~n~) =
 *p*~α~ − 3, where *n*, *α* ≥ 3, *m* ≥ 1, and *p*~n~ is the *n*^th^
 prime.
 
