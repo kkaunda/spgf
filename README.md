@@ -290,14 +290,14 @@ Definition 2.
 
 **Formal statement**
 
-> **Definition 2**: Define a *v* x *w* sub-array *TT*~i~ of *T* such that *v, w* ≥ 2.
+> **Definition 2**: Define a *v* x *w* sub-array *TT*<sub>i</sub> of *T* such that *v, w* ≥ 2.
 
 **Notes**
 
 Definition 2 defines a sub-array which is later used to algebraically
 construct a pattern.
 
-> Example: *TT*<sub>1</sub> = ((2, 4, 8, 10), (0, 2, 6, 8), (-2, 0, 4, 6), (-6, -4, 0, 2)).
+`Example: *TT*<sub>1</sub> = ((2, 4, 8, 10), (0, 2, 6, 8), (-2, 0, 4, 6), (-6, -4, 0, 2)).`
 
 **LEAN4 code**
 
