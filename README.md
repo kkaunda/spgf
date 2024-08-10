@@ -10,39 +10,6 @@
 
 ![](vertopal_bfea56392a264e1da44fa95b98b2549d/media/image2.jpeg)
 
-> import Mathlib.Data.Nat.Prime.Basic
->
-> import data.set.basic
->
-> import algebra.group.defs
->
-> open int
->
-> -- Define the set of all primes (ℤ is used to include additive inverses)
->
-> def is_prime (z : ℤ) : Prop := nat.prime z.nat_abs
->
-> -- Define the Cayley table T as a function from pairs of primes and their inverses to ℤ
->
-> def T (p q : ℤ) (hp : is_prime p) (hq : is_prime q) : ℤ :=
->
->   if (0 < p ∧ 0 < q) then p + (-q) else 0
->
-> -- Example usage: proving that T respects commutativity in the prime groupoid
->
-> example (p q : ℤ) (hp : is_prime p) (hq : is_prime q) : T p q hp hq = T q p hq hp :=
->
-> begin
->
->     unfold T,
->
->     split_ifs,
->
->     { simp [add_comm] },
->
->     { refl },
->
-> End
 
 ```
 import Mathlib.Data.Nat.Prime.Basic
@@ -55,28 +22,19 @@ open int
 def is_prime (z : ℤ) : Prop := nat.prime z.nat_abs
 
 -- Define the Cayley table T as a function from pairs of primes and their inverses to ℤ
-
 def T (p q : ℤ) (hp : is_prime p) (hq : is_prime q) : ℤ :=
-
   if (0 < p ∧ 0 < q) then p + (-q) else 0
 
 -- Example usage: proving that T respects commutativity in the prime groupoid
-
 example (p q : ℤ) (hp : is_prime p) (hq : is_prime q) : T p q hp hq = T q p hq hp :=
 
 begin
-
     unfold T,
-
     split_ifs,
-
     { simp [add_comm] },
-
     { refl },
-
 End
 ```
-
 
 # **Structure in Prime Gaps -- Formalized**
 
@@ -160,13 +118,12 @@ presents two main results the first of which is the claim that there
 exist structured gaps between primes and the second result is basically
 a corollary or special case of the first. These are stated as follows:
 
-**Theorem 1**: For every prime *p*<sub>α</sub>, there exists infinitely many
-pairs of primes, (*p*<sub>n</sub>, *p*<sub>n+m</sub>), such that (*p*<sub>n+m</sub> − *p*<sub>n</sub>) =
-*p*<sub>α</sub> − 3, where *n*, *α* ≥ 3, *m* ≥ 1, and *p*<sub>n</sub> is the *n*<sup>th</sup>
-prime.
+> **Theorem 1**: For every prime *p*<sub>α</sub>, there exists infinitely many
+> pairs of primes, (*p*<sub>n</sub>, *p*<sub>n+m</sub>), such that (*p*<sub>n+m</sub> − *p*<sub>n</sub>) =
+> *p*<sub>α</sub> − 3, where *n*, *α* ≥ 3, *m* ≥ 1, and *p*<sub>n</sub> is the *n*<sup>th</sup>
+> prime.
 
-**Theorem 2**: There exist infinitely many pairs of primes with a gap of
-2.
+> **Theorem 2**: There exist infinitely many pairs of primes with a gap of 2.
 
 ## A brief visual overview of the results presented in the article *Structure in Prime Gaps*
 
@@ -297,6 +254,7 @@ of the prime involved.
 
 **LEAN4 code**
 
+```
 import Mathlib.Data.Nat.Prime.Basic
 import data.set.basic
 import algebra.group.defs
@@ -304,30 +262,22 @@ import algebra.group.defs
 open int
 
 -- Define the set of all primes (ℤ is used to include additive inverses)
-
 def is_prime (z : ℤ) : Prop := nat.prime z.nat_abs
 
 -- Define the Cayley table T as a function from pairs of primes and their inverses to ℤ
-
 def T (p q : ℤ) (hp : is_prime p) (hq : is_prime q) : ℤ :=
-
   if (0 < p ∧ 0 < q) then p + (-q) else 0
 
 -- Example usage: proving that T respects commutativity in the prime groupoid
-
 example (p q : ℤ) (hp : is_prime p) (hq : is_prime q) : T p q hp hq = T q p hq hp :=
 
 begin
-
-  unfold T,
-
-  split_ifs,
-
-  { simp [add_comm] },
-
-  { refl },
-
+    unfold T,
+    split_ifs,
+    { simp [add_comm] },
+    { refl },
 End
+```
 
 **LEAN4 code annotation**
 
@@ -340,16 +290,14 @@ Definition 2.
 
 **Formal statement**
 
-**Definition 2**: Define a *v* x *w* sub-array *TT*~i~ of *T* such that
-*v, w* ≥ 2.
+> **Definition 2**: Define a *v* x *w* sub-array *TT*~i~ of *T* such that *v, w* ≥ 2.
 
 **Notes**
 
 Definition 2 defines a sub-array which is later used to algebraically
 construct a pattern.
 
-Example: *TT*~1~ = ((2, 4, 8, 10), (0, 2, 6, 8), (-2, 0, 4, 6), (-6, -4,
-0, 2)).
+> Example: *TT*<sub>1</sub> = ((2, 4, 8, 10), (0, 2, 6, 8), (-2, 0, 4, 6), (-6, -4, 0, 2)).
 
 **LEAN4 code**
 
