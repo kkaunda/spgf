@@ -38,7 +38,7 @@ End
 
 # **Structure in Prime Gaps -- Formalized**
 
-## **By Kajani Kaunda, , , , , \... .**
+## **By Kajani Kaunda, Jane Doe, John Doe, , , \... .**
 
 ## **Abstract**
 
@@ -227,6 +227,8 @@ In addition to this document, we also provide the following:
 
 **The Formalization Process**
 
+The final LEAN4 code is most likely to be different from the individual code snippets but at the very least it is good to know and verify that formalization is possible with the current technology stack; LEAN4 and the Mathlib library.
+
 We begin as follows:
 
 **Item name**
@@ -297,7 +299,7 @@ Definition 2.
 Definition 2 defines a sub-array which is later used to algebraically
 construct a pattern.
 
-`Example: `*TT*<sub>1</sub>` = ((2, 4, 8, 10), (0, 2, 6, 8), (-2, 0, 4, 6), (-6, -4, 0, 2)).`
+> Example: *TT*<sub>1</sub> = ((2, 4, 8, 10), (0, 2, 6, 8), (-2, 0, 4, 6), (-6, -4, 0, 2)).
 
 **LEAN4 code**
 
@@ -324,7 +326,7 @@ Definition 3.
 
 This is one of the structures used in the analysis of *T*.
 
-`Example: for `*TT*<sub>1</sub>`, we have `*TT*<sub>1</sub>.*β*` = (2, 10, -6, 2).`
+> Example: for *TT*<sub>1</sub>, we have *TT*<sub>1</sub>.*β* = (2, 10, -6, 2).
 
 **LEAN4 code**
 
