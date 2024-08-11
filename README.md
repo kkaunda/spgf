@@ -317,14 +317,14 @@ Definition 3.
 
 **Formal statement**
 
-**Definition 3**: Define a 4-tuple *β* = (*A, B, L, E*) such that the
-values of the elements are the vertices of *TT*~i~.
+> **Definition 3**: Define a 4-tuple *β* = (*A, B, L, E*) such that the
+> values of the elements are the vertices of *TT*~i~.
 
 **Notes**
 
 This is one of the structures used in the analysis of *T*.
 
-Example: for *TT*~1~, we have *TT*~1~. *β* = (2, 10, -6, 2).
+`Example: for `*TT*<sub>1</sub>`, we have `*TT*<sub>1</sub>.*β*` = (2, 10, -6, 2).`
 
 **LEAN4 code**
 
@@ -346,8 +346,7 @@ Lemma 4.1. This is the first Lemma.
 
 **Formal statement**
 
-**Lemma 4.1** : Prove that: Given a 4-tuple *β* then *A* + *E* = *B* +
-*L*.
+> **Lemma 4.1** : Prove that: Given a 4-tuple *β* then *A* + *E* = *B* + *L*.
 
 **Notes**
 
@@ -375,10 +374,7 @@ Lemma 4.2. This is the second Lemma.
 
 **Formal statement**
 
-**Lema 4.2** : Prove that: All prime numbers greater than 3 can be
-expressed in the form 6n + 1
-
-> or 6n − 1.
+> **Lema 4.2** : Prove that: All prime numbers greater than 3 can be expressed in the form 6*n* + 1 or 6*n* − 1.
 >
 > (A known result).
 
@@ -404,63 +400,62 @@ Lemma 4.3. this is the third Lemma.
 
 **Formal statement**
 
-**Lemma 4.3**: Let *t*<sub>m,n</sub> be a term in *T* where the indexes *m* and
-*n* are zero based and refer to the rows and columns in *T*
-respectively.
+> **Lemma 4.3**: Let *t*<sub>m,n</sub> be a term in *T* where the indexes *m* and *n* are zero based and refer to the
+> rows and columns in *T* respectively.
 
 > Prove that:
 >
-> For every prime *p*~α~ ≥ 5, there exists a sub-array *TT*~i~ ∈ *T*
+> For every prime *p*<sub>α</sub> ≥ 5, there exists a sub-array *TT*<sub>i</sub> ∈ *T*
 > such that the following properties are simultaneously true;
 >
-> Property 1 : *TT*~i~.*A* + 3 ∈ {6*n* ± 1\|*n* ∈ *N*~1~}
+> Property 1 : *TT*<sub>i</sub>.*A* + 3 ∈ {6*n* ± 1\|*n* ∈ *N*<sub>1</sub>}
 >
-> Property 2 : (*TT*~i~.*B* + 3) − *TT*~i~.*E* ∈ {6*n* ± 1\|*n* ∈
-> *N*~1~}
+> Property 2 : (*TT*<sub>i</sub>.*B* + 3) − *TT*<sub>i</sub>.*E* ∈ {6*n* ± 1\|*n* ∈
+> *N*<sub>1</sub>}
 >
-> Property 3 : *TT*~i~.*L* ≡ 0 (mod 6)
+> Property 3 : *TT*<sub>i</sub>.*L* ≡ 0 (mod 6)
 >
-> Property 4 : *TT*~i~.*A* = *TT*~i~.*E*
+> Property 4 : *TT*<sub>i</sub>.*A* = *TT*<sub>i</sub>.*E*
 >
-> Property 5 : *TT*~i~.*B* + 3 ∈ {6*n* ± 1\|*n* ∈ *N*~1~}
+> Property 5 : *TT*<sub>i</sub>.*B* + 3 ∈ {6*n* ± 1\|*n* ∈ *N*<sub>1</sub>}
 >
 > If and only if
 >
-> for *TT*~i~.*A* + 3 ∈ {6*n* − 1\|*n* ∈ *N*~1~};
+> for *TT*<sub>i</sub>.*A* + 3 ∈ {6*n* − 1\|*n* ∈ *N*<sub>1</sub>};
 >
-> *TT*~i~.*A* = 6*x* + 6*y* − 4
+> *TT*<sub>i</sub>.*A* = 6*x* + 6*y* − 4
 >
-> *TT*~i~.*B* = 6*x* + 12*y* − 8
+> *TT*<sub>i</sub>.*B* = 6*x* + 12*y* − 8
 >
-> *TT*~i~.*L* = 6*x*
+> *TT*<sub>i</sub>.*L* = 6*x*
 >
-> *TT*~i~.*E* = 6*x* + 6*y* − 4
+> *TT*<sub>i</sub>.*E* = 6*x* + 6*y* − 4
 >
-> for *TT*~i~.*A* + 3 ∈ {6*n* + 1\|*n* ∈ *N*~1~};
+> for *TT*<sub>i</sub>.*A* + 3 ∈ {6*n* + 1\|*n* ∈ *N*<sub>1</sub>};
 >
-> *TT*~i~.*A* = 6*x* + 6*y* − 2
+> *TT*<sub>i</sub>.*A* = 6*x* + 6*y* − 2
 >
-> *TT*~i~.*B* = 6*x* + 12*y* − 4
+> *TT*<sub>i</sub>.*B* = 6*x* + 12*y* − 4
 >
-> *TT*~i~.*L* = 6*x*
+> *TT*<sub>i</sub>.*L* = 6*x*
 >
-> *TT*~i~.*E* = 6*x* + 6*y* − 2
+> *TT*<sub>i</sub>.*E* = 6*x* + 6*y* − 2
 >
-> where *n* ∈ *N*~1~, *x* \< *n*, *y* \> 0, *n* = *x* + *y*,
-> (*TT*~i~.*A* + 3) = *p*~α~ and *TT*~i~.*A* = *t*~2,k~.
+> where *n* ∈ *N*<sub>1</sub>, *x* \< *n*, *y* \> 0, *n* = *x* + *y*,
+> (*TT*<sub>i</sub>.*A* + 3) = *p*<sub>α</sub> and *TT*<sub>i</sub>.*A* = *t*<sub>2,k</sub>.
 
 **Notes**
 
 This result demonstrates the existence of a pattern. It algebraically
-shows that for every prime *p*~α~ ≥ 5, there is a pattern *TT*~i~ that
-defines a pair of integers *Q*~i~ and *R*~i~ such that *R*~i~ − *Q*~i~ =
-*p*~α~ − 3.
+shows that for every prime *p*<sub>α</sub> ≥ 5, there is a pattern *TT*<sub>i</sub> that
+defines a pair of integers *Q*<sub>i</sub> and *R*<sub>i</sub> such that *R*<sub>i</sub> − *Q*<sub>i</sub> =
+*p*<sub>α</sub> − 3.
 
 The key in the proof of this result is the following analysis:
 
--   We are given *p*~α~ as a constant quantity.
+-   We are given *p*<sub>α</sub> as a constant quantity.
 
--   Now *p*~α~ can be expressed in the form 6*n* ± 1.
+-   Now *p*<sub>α</sub> can be expressed in the form 6*n* ± 1.
 
 -   This implies that *n* in the expression 6*n* ± 1 is constant.
 
@@ -474,12 +469,12 @@ The key in the proof of this result is the following analysis:
 
 But how are the sets *M* and *N* derived?
 
-Notice that by Lemma 4.3, *TT*~i~.*A* = *TT*~i~.*E* and (*TT*~i~.*A* +
-3) = *p*~α~. Since *p*~α~ is prime then it can be expressed in the forms
+Notice that by Lemma 4.3, *TT*<sub>i</sub>.*A* = *TT*<sub>i</sub>.*E* and (*TT*<sub>i</sub>.*A* +
+3) = *p*<sub>α</sub>. Since *p*<sub>α</sub> is prime then it can be expressed in the forms
 6*n* ± 1 or 6(*x* + *y*) ± 1. And by Lemma 4.1, *A* + E = *B* + *L*,
-which implies that *TT*~i~.*B* + *TT*~i~.*L* = *TT*~i~.*A* + *TT*~i~.E =
+which implies that *TT*<sub>i</sub>.*B* + *TT*<sub>i</sub>.*L* = *TT*<sub>i</sub>.*A* + *TT*<sub>i</sub>.E =
 ((6*x +* 6*y* + -4) + (6*x +* 6*y +* -4)) or ((6*x +* 6*y +* -2) + (6*x
-+* 6*y +* -2)) depending on which form *p*~α~ can be expressed.
++* 6*y +* -2)) depending on which form *p*<sub>α</sub> can be expressed.
 
 **LEAN4 code**
 
@@ -501,21 +496,20 @@ Lemma 4.4. This is the fourth Lemma.
 
 **Formal statement**
 
-**Lemma 4.4**: Let any sub-array *TT*~i~ that satisfies Lemma 4.3 be
-referred to as a *Prime Array*.
+> **Lemma 4.4**: Let any sub-array *TT*<sub>i</sub> that satisfies Lemma 4.3 be referred to as a *Prime Array*.
 
-> Prove that: For every prime *p*~α~ ≥ 5, there are infinitely many
-> *Prime Arrays* such that *TT~i~.A = p*~α~ *− 3.*
+> Prove that: For every prime *p*<sub>α</sub> ≥ 5, there are infinitely many
+> *Prime Arrays* such that *TT<sub>i</sub>.A = p*<sub>α</sub> *− 3.*
 
 **Notes**
 
-This will show that for any prime *p*~α~ ≥ 5 the pattern defined by the
-*Prime Array TT*~i~ occurs infinitely often and that consequently, the
-integer pairs (*Q*~i~, *R*~i~) also occur infinitely often.
+This will show that for any prime *p*<sub>α</sub> ≥ 5 the pattern defined by the
+*Prime Array TT*<sub>i</sub> occurs infinitely often and that consequently, the
+integer pairs (*Q*<sub>i</sub>, *R*<sub>i</sub>) also occur infinitely often.
 
-The key in the proof is to show that for any prime *p*~α~ ≥ 5,
+The key in the proof is to show that for any prime *p*<sub>α</sub> ≥ 5,
 
--   *p*~α~ is constant.
+-   *p*<sub>α</sub> is constant.
 
 -   Which implies *n* is constant.
 
@@ -531,7 +525,7 @@ The key in the proof is to show that for any prime *p*~α~ ≥ 5,
 
 -   This implies that the value of *y* can be changed infinitely often
     and each change represents a different sub-array or *Prime Array*
-    *TT*~i~.
+    *TT*<sub>i</sub>.
 
 **LEAN4 code**
 
@@ -551,22 +545,22 @@ Lemma 4.5. This is the fifth Lemma.
 
 **Formal statement**
 
-**Lemma 4.5**: Prove that: For every prime *p*~α~ ≥ 5, there exists
-infinitely many *Prime Arrays*, *TT*~i~, such that *TT*~i~ .*A* = *p*~α~
-− 3 and (*T*~i~.*B* + 3) and ((*T*~i~.*B* + 3) −*T*~i~.*E*) are prime.
+> **Lemma 4.5**: Prove that: For every prime *p*<sub>α</sub> ≥ 5, there exists infinitely many *Prime Arrays*,
+> *TT*<sub>i</sub>, such that *TT*<sub>i</sub>.*A* = *p*<sub>α</sub> − 3 and (*T*<sub>i</sub>.*B* + 3) and ((*T*<sub>i</sub>.
+> *B* + 3) −*T*<sub>i</sub>.*E*) are prime.
 
 **Notes**
 
-This will show that for any prime *p*~α~ ≥ 5, the *Prime Arrays* *TT*~i~
-occur infinitely often and *Q*~i~ and *R*~i~ are prime. Notice that
-here, (*TT*~i~.*B* + 3) = *R*~i~ and *Q*~i~ = ((*TT*~i~.*B* + 3) −
-*TT*~i~.*E*).
+This will show that for any prime *p*<sub>α</sub> ≥ 5, the *Prime Arrays* *TT*<sub>i</sub>
+occur infinitely often and *Q*<sub>i</sub> and *R*<sub>i</sub> are prime. Notice that
+here, (*TT*<sub>i</sub>.*B* + 3) = *R*<sub>i</sub> and *Q*<sub>i</sub> = ((*TT*<sub>i</sub>.*B* + 3) −
+*TT*<sub>i</sub>.*E*).
 
 The proof here relies on the construction of *T* where all the elements
 on the first row of *T* are prime
 
-We can then algebraically show that (*TT*~i~.*B* + 3) and
-((*TT*~i~.*B* + 3) − *TT*~i~.*E*) are prime.
+We can then algebraically show that (*TT*<sub>i</sub>.*B* + 3) and
+((*TT*<sub>i</sub>.*B* + 3) − *TT*<sub>i</sub>.*E*) are prime.
 
 **LEAN4 code**
 
@@ -586,9 +580,9 @@ Theorem 1. The first Theorem, the first of the two main results.
 
 **Formal statement**
 
-**Theorem 1**: Prove that: For every prime *p*~α~, there exists
-infinitely many pairs of primes, (*p*~n~, *p*~n+m~), such that (*p*~n+m~
-− *p*~n~) = *p*~α~ − 3, where n, α ≥ 3, m ≥ 1, and *p*~n~ is the n^th^
+**Theorem 1**: Prove that: For every prime *p*<sub>α</sub>, there exists
+infinitely many pairs of primes, (*p*<sub>n</sub>, *p*<sub>n+m</sub>), such that (*p*<sub>n+m</sub>
+− *p*<sub>n</sub>) = *p*<sub>α</sub> − 3, where n, α ≥ 3, m ≥ 1, and *p*<sub>n</sub> is the n<sup>th</sup>
 prime.
 
 **Notes**
@@ -596,38 +590,38 @@ prime.
 The claim is that this result is implied from the previous results as
 demonstrated in the following steps:
 
-**Step 1**: By Lemma 4.5, and the construction of *T*, *TT*~i~.*A* and
-*TT*~i~.*E* are prime gaps.
+**Step 1**: By Lemma 4.5, and the construction of *T*, *TT*<sub>i</sub>.*A* and
+*TT*<sub>i</sub>.*E* are prime gaps.
 
-**Step 2**: By Lemma 4.3, *TT*~i~.*A* = *TT*~i~*.E*.
+**Step 2**: By Lemma 4.3, *TT*<sub>i</sub>.*A* = *TT*<sub>i</sub>*.E*.
 
-This is equivalent to: (*TT*~i~.*A* + 3) − 3 = ((*TT*~i~.*B* + 3) −
-((*TT*~i~.*B* + 3) − *TT*~i~.*E*)).
+This is equivalent to: (*TT*<sub>i</sub>.*A* + 3) − 3 = ((*TT*<sub>i</sub>.*B* + 3) −
+((*TT*<sub>i</sub>.*B* + 3) − *TT*<sub>i</sub>.*E*)).
 
-**Step 3**: By Lemma 4.5, the following are prime; (*TT*~i~.*A* + 3),
-((*TT*~i~.*B* + 3) − *TT*~i~.*E*), (*TT*~i~.*B* + 3).
+**Step 3**: By Lemma 4.5, the following are prime; (*TT*<sub>i</sub>.*A* + 3),
+((*TT*<sub>i</sub>.*B* + 3) − *TT*<sub>i</sub>.*E*), (*TT*<sub>i</sub>.*B* + 3).
 
-**Step 4**: By Lemma 4.5, for every prime (*TT*~i~.*A* + 3) ≥ 5, there
+**Step 4**: By Lemma 4.5, for every prime (*TT*<sub>i</sub>.*A* + 3) ≥ 5, there
 are infinitely many of the following pairs of primes defined as:
-(((*TT*~i~.*B* + 3) − *TT*~i~.*E*), (*TT*~i~.*B* + 3)).
+(((*TT*<sub>i</sub>.*B* + 3) − *TT*<sub>i</sub>.*E*), (*TT*<sub>i</sub>.*B* + 3)).
 
 We can then see that the following statement is implied:
 
-> For every prime (*TT*~i~.*A* + 3) ≥ 5, there exists infinitely many
-> pairs of primes, (((*TT*~i~.*B* + 3) − *TT*~i~.*E*), (*TT*~i~.*B* +
-> 3)), such that ((*TT*~i~.*B* + 3) − ((*TT*~i~.*B* + 3) − *TT*~i~.*E*))
-> = (*TT*~i~.*A* + 3) − 3.
+> For every prime (*TT*<sub>i</sub>.*A* + 3) ≥ 5, there exists infinitely many
+> pairs of primes, (((*TT*<sub>i</sub>.*B* + 3) − *TT*<sub>i</sub>.*E*), (*TT*<sub>i</sub>.*B* +
+> 3)), such that ((*TT*<sub>i</sub>.*B* + 3) − ((*TT*<sub>i</sub>.*B* + 3) − *TT*<sub>i</sub>.*E*))
+> = (*TT*<sub>i</sub>.*A* + 3) − 3.
 
 This statement is equivalent to the formal statement of Theorem 1 which
 can be is re-stated using the following equivalent assignments:
 
-> *p*~α~ − 3 = *TT*~i~.*A*.
+> *p*<sub>α</sub> − 3 = *TT*<sub>i</sub>.*A*.
 >
-> *p*~n+m~ − 3 = *TT*~i~.*B.*
+> *p*<sub>n+m</sub> − 3 = *TT*<sub>i</sub>.*B.*
 >
-> *p*~α~ − *p*~n~ = *TT*~i~.*L*.
+> *p*<sub>α</sub> − *p*<sub>n</sub> = *TT*<sub>i</sub>.*L*.
 >
-> *p*~n+m~ − *p*~n~ = *TT*~i~.*E.*
+> *p*<sub>n+m</sub> − *p*<sub>n</sub> = *TT*<sub>i</sub>.*E.*
 
 **LEAN4 code**
 
@@ -648,12 +642,11 @@ results.
 
 **Formal statement**
 
-**Theorem 2**: Prove that there exist infinitely many pairs of primes
-with a gap of 2.
+> **Theorem 2**: Prove that there exist infinitely many pairs of primes with a gap of 2.
 
 **Notes**
 
-This result is just a special case of Theorem 1 when *p*~α~ is set to 5.
+This result is just a special case of Theorem 1 when *p*<sub>α</sub> is set to 5.
 I am sure this would be resolved by LEAN4 using the \"refl\" similar
 tactic.
 
@@ -684,10 +677,9 @@ Gaps*](https://www.researchsquare.com/article/rs-4058806/latest),
 (2024).
 
 \[2\] Monticone, P: Lean 4 Project Template for blueprint-driven
-formalization projects, https://pitmonticone.github.io/LeanProject/.
+formalization projects, [*https://pitmonticone.github.io/LeanProject/*](https://pitmonticone.github.io/LeanProject/).
 
-\[3\] Patrick Massot: A plasTeX plugin allowing to write blueprints for
+\[3\] Patrick Massot: *LeanBlueprint*, A plasTeX plugin allowing to write blueprints for
 Lean 4 projects.
 
-\[4\] LEANPROVER ZULIP CHAT Community:
-https://leanprover.zulipchat.com/.
+\[4\] LEANPROVER ZULIP CHAT Community: [*https://leanprover.zulipchat.com/*](https://leanprover.zulipchat.com/).
