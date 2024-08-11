@@ -128,7 +128,7 @@ a corollary or special case of the first. These are stated as follows:
 ## A brief visual overview of the results presented in the article *Structure in Prime Gaps*
 
 The following partial Cayley table *T* represents gaps between primes in
-which the results we are formalizing are visually *self-evident*.
+which the results we are formalizing are *self-evident*.
 
 Consider Table 1, it is not immediately apparent if any useful pattern
 can be discerned from it. However, with the highlights in Table 2, a
