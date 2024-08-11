@@ -248,11 +248,8 @@ additive inverses.
 
 The set *J* is defined as follows *J* = (\...,−*p*<sub>n+2</sub>, −*p*<sub>n+1</sub>,
 −*p*<sub>n</sub>, *p*<sub>n</sub>, p<sub>n+1</sub>, *p*<sub>n+2</sub>, \...). Notice that since primes are
-infinite then by definition the structure T is also infinite. Ideally,
-the proof structures used by LEAN4 must reflect this property rather
-than relying on the proof not depending on this property being
-represented in the proof structures since there is no empirical analysis
-of the prime involved.
+infinite then by definition the structure T is also infinite. The structures used by LEAN4 in defining *T* must reflect
+this property.
 
 **LEAN4 code**
 
@@ -320,7 +317,7 @@ Definition 3.
 **Formal statement**
 
 > **Definition 3**: Define a 4-tuple *β* = (*A, B, L, E*) such that the
-> values of the elements are the vertices of *TT*~i~.
+> values of its elements are the vertices of *TT*~i~.
 
 **Notes**
 
