@@ -1,6 +1,6 @@
 # STRUCTURE IN PRIME GAPS - FORMALIZED
 
-## PROJECT PROPOSAL
+## PROJECT PROPOSALS
 
 ## prepared for: \https://leanprover.zulipchat.com/
 
