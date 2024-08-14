@@ -74,26 +74,29 @@ by
 -- lean 4 code here
 
 
+
 -- Lemma 4.2: All prime numbers greater than 3 can be expressed in the form 6n + 1 or 6n - 1
 lemma lemma_4_2 (p : ℕ) (hp : p > 3) (hprime : Nat.Prime p) : ∃ n, p = 6 * n + 1 ∨ p = 6 * n - 1 :=
 by
-  -- Prime numbers greater than 3 are either of the form 6n + 1 or 6n - 1.
-  -- We will consider the possible remainders when dividing `p` by 6.
-  have mod6_cases : p % 6 = 1 ∨ p % 6 = 5 :=
-    Nat.Prime.mod_eq_one_or_mod_eq_five_of_prime_gt_three hprime hp
+ sorry
+--working on this one now ... any contribution is much appreciated.
 
-  -- Now we use these two cases to construct our `n`.
-  cases mod6_cases with h1 h5,
-  -- Case 1: p % 6 = 1
-  { use (p / 6),
-    left,
-    rw Nat.mod_add_div p 6,
-    exact h1, },
-  -- Case 2: p % 6 = 5
-  { use (p / 6),
-    right,
-    rw [Nat.mod_add_div p 6, ← Nat.sub_eq_of_eq_add h5],
-    ring, }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
