@@ -1,3 +1,5 @@
+def hi := "Hi!"
+/- krk
 import Mathlib.Data.Nat.Prime.Basic
 import data.list.basic
 import tactic
@@ -29,3 +31,4 @@ def T : list (list ℤ) := cayley_table 10  -- Generates a 10x10 portion of the 
 
 -- Example of extracting the Cayley table
 #eval T
+-/

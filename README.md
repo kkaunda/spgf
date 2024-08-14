@@ -10,30 +10,32 @@
 
 ![](vertopal_bfea56392a264e1da44fa95b98b2549d/media/image2.jpeg)
 
-
 ```
 import Mathlib.Data.Nat.Prime.Basic
-import data.set.basic
-import algebra.group.defs
+import Mathlib.Data.List.Basic
+import Mathlib.Tactic.Linarith
+import Mathlib.Data.Int.Defs
+import Mathlib.Tactic.Basic
 
-open int
+open List Nat
 
--- Define the set of all primes (ℤ is used to include additive inverses)
-def is_prime (z : ℤ) : Prop := nat.prime z.nat_abs
+-- Define the set of primes and their additive inverses
+def primes_and_inverses : List ℤ :=
+  (List.range 100).filter Nat.Prime |>.map (λ p => [↑p, -↑p]) |> List.join
 
--- Define the Cayley table T as a function from pairs of primes and their inverses to ℤ
-def T (p q : ℤ) (hp : is_prime p) (hq : is_prime q) : ℤ :=
-  if (0 < p ∧ 0 < q) then p + (-q) else 0
+-- Construct the Cayley table T for a finite portion
+def cayley_table (n : ℕ) : List (List ℤ) :=
+  let primes := (List.range n).filter Nat.Prime |>.map (λ p => ↑p)
+  let inverses := primes.map (λ p => -p)
+  let first_row := primes
+  let first_column := inverses
+  let table := first_column.map (λ inv => first_row.map (λ p => p + inv))
+  first_row :: table
 
--- Example usage: proving that T respects commutativity in the prime groupoid
-example (p q : ℤ) (hp : is_prime p) (hq : is_prime q) : T p q hp hq = T q p hq hp :=
+-- Example of using the cayley_table with a finite portion
+def T : List (List ℤ) := cayley_table 30
 
-begin
-    unfold T,
-    split_ifs,
-    { simp [add_comm] },
-    { refl },
-End
+#eval T -- To visualize a portion of the table
 ```
 
 # **Structure in Prime Gaps -- Formalized**
@@ -252,30 +254,32 @@ infinite then by definition the structure T is also infinite. The structures use
 this property.
 
 **LEAN4 code**
-
 ```
 import Mathlib.Data.Nat.Prime.Basic
-import data.set.basic
-import algebra.group.defs
+import Mathlib.Data.List.Basic
+import Mathlib.Tactic.Linarith
+import Mathlib.Data.Int.Defs
+import Mathlib.Tactic.Basic
 
-open int
+open List Nat
 
--- Define the set of all primes (ℤ is used to include additive inverses)
-def is_prime (z : ℤ) : Prop := nat.prime z.nat_abs
+-- Define the set of primes and their additive inverses
+def primes_and_inverses : List ℤ :=
+  (List.range 100).filter Nat.Prime |>.map (λ p => [↑p, -↑p]) |> List.join
 
--- Define the Cayley table T as a function from pairs of primes and their inverses to ℤ
-def T (p q : ℤ) (hp : is_prime p) (hq : is_prime q) : ℤ :=
-  if (0 < p ∧ 0 < q) then p + (-q) else 0
+-- Construct the Cayley table T for a finite portion
+def cayley_table (n : ℕ) : List (List ℤ) :=
+  let primes := (List.range n).filter Nat.Prime |>.map (λ p => ↑p)
+  let inverses := primes.map (λ p => -p)
+  let first_row := primes
+  let first_column := inverses
+  let table := first_column.map (λ inv => first_row.map (λ p => p + inv))
+  first_row :: table
 
--- Example usage: proving that T respects commutativity in the prime groupoid
-example (p q : ℤ) (hp : is_prime p) (hq : is_prime q) : T p q hp hq = T q p hq hp :=
+-- Example of using the cayley_table with a finite portion
+def T : List (List ℤ) := cayley_table 30
 
-begin
-    unfold T,
-    split_ifs,
-    { simp [add_comm] },
-    { refl },
-End
+#eval T -- To visualize a portion of the table
 ```
 
 **LEAN4 code annotation**
@@ -299,10 +303,16 @@ construct a pattern.
 > Example: *TT*<sub>1</sub> = ((2, 4, 8, 10), (0, 2, 6, 8), (-2, 0, 4, 6), (-6, -4, 0, 2)).
 
 **LEAN4 code**
+```
+-- Define a sub-array TTi of T, where v x w are its dimensions
+def sub_array (T : List (List ℤ)) (r c v w : ℕ) : List (List ℤ) :=
+  (T.drop r).take v |>.map (λ row => (row.drop c).take w)
 
-  -----------------------------------------------------------------------
+-- Example: Extract a 3x3 sub-array from T
+def TT1 : List (List ℤ) := sub_array T 1 1 3 3
 
-  -----------------------------------------------------------------------
+#eval TT1 -- Visualize the sub-array
+```
 
 **LEAN4 code annotation**
 
@@ -317,7 +327,7 @@ Definition 3.
 **Formal statement**
 
 > **Definition 3**: Define a 4-tuple *β* = (*A, B, L, E*) such that the
-> values of its elements are the vertices of *TT*~i~.
+> values of its elements are the vertices of *TT*<sub>i</sub>.
 
 **Notes**
 
@@ -326,10 +336,32 @@ This is one of the structures used in the analysis of *T*.
 > Example: for *TT*<sub>1</sub>, we have *TT*<sub>1</sub>.*β* = (2, 10, -6, 2).
 
 **LEAN4 code**
+```
+-- Define the structure for the 4-tuple β
+structure Beta where
+  A : ℤ
+  B : ℤ
+  L : ℤ
+  E : ℤ
 
-  -----------------------------------------------------------------------
+-- Create a 4-tuple β from the vertices of a sub-array TTi
+def create_beta (TTi : List (List ℤ)) : Beta :=
+  ⟨TTi.head!.head!, TTi.head!.getLast!, TTi.getLast!.head!, TTi.getLast!.getLast!⟩
 
-  -----------------------------------------------------------------------
+--- -- Provide a Repr instance for Beta to define how it should be displayed
+--- instance : Repr Beta :=
+---  ⟨fun β => s!"⟨{β.A}, {β.B}, {β.L}, {β.E}⟩"⟩
+
+-- Example usage: Create β for TT1
+def β1 : Beta := create_beta TT1
+
+--- #eval β1 -- Visualize β1
+
+#eval β1.A -- Visualize β1
+#eval β1.B -- Visualize β1
+#eval β1.L -- Visualize β1
+#eval β1.E -- Visualize β1
+```
 
 **LEAN4 code annotation**
 
@@ -354,10 +386,17 @@ This is one of the results used in the subsequent proofs.
 The proof is derived from the construction of *T*.
 
 **LEAN4 code**
-
-  -----------------------------------------------------------------------
-
-  -----------------------------------------------------------------------
+```
+lemma lemma_4_1 (m n c k : ℤ) :
+  let TTi_A := m + n
+  let TTi_B := m + (n + k)
+  let TTi_L := (m + c) + n
+  let TTi_E := (m + c) + (n + k)
+  TTi_B + TTi_L = TTi_A + TTi_E :=
+by
+  -- Expand and simplify the expressions
+  linarith
+```
 
 **LEAN4 code annotation**
 
