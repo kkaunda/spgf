@@ -111,7 +111,7 @@ In this paper, we aim to formalize the results presented in the article
 *Structure in Prime Gaps* using LEAN4, the latest version of the LEAN
 proof assistant. By leveraging the capabilities of LEAN4, we seek to
 ensure the correctness and robustness of these findings relating to the
-existence of infinitely many pairs of prime numbers with specific gaps.
+existence of infinitely many *structured* gaps between prime numbers.
 This formalization will provide a rigorous foundation for the results
 and contribute to the broader effort of formalizing mathematics.
 
