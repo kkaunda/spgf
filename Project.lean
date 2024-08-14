@@ -74,14 +74,91 @@ by
 -- lean 4 code here
 
 
+--working on this one now ... any contribution is much appreciated.
+-- Lemma 4.2: All prime numbers greater than 3 can be expressed in the form 6n + 1 or 6n - 1
+lemma lemma_4_2 (p : ℕ) (hp : p > 3) (hprime : Nat.Prime p) : ∃ n, p = 6 * n + 1 ∨ p = 6 * n - 1 :=
+by
+  --sorry
+  -- Primes greater than 3 are not divisible by 2 or 3
+  have h1 : p % 6 ≠ 0 := λ h => by { rw h at hprime, exact hprime.not_prime_of_not_prime (nat.prime.dvd_of_dvd_mul_right h1) },
+  have h2 : p % 6 ≠ 2 := λ h, by { rw h at hprime, exact hprime.not_prime_of_not_prime (nat.prime.dvd_of_dvd_mul_right h2) },
+  have h3 : p % 6 ≠ 3 := λ h, by { rw h at hprime, exact hprime.not_prime_of_not_prime (nat.prime.dvd_of_dvd_mul_right h3) },
+  have h4 : p % 6 ≠ 4 := λ h, by { rw h at hprime, exact hprime.not_prime_of_not_prime (nat.prime.dvd_of_dvd_mul_right h4) },
+
+  -- By exclusion, p must be congruent to 1 or 5 modulo 6
+  cases (p % 6) with
+  | 1 := exact ⟨p / 6, or.inl rfl⟩
+  | 5 := exact ⟨p / 6, or.inr rfl⟩
+  | _ := by { exfalso, exact or.elim (or.elim (or.elim (or.elim (h1.symm) h2.symm) h3.symm) h4.symm) hprime }
+
+
+
+
+/- krk
+
+  import Mathlib.Data.Nat.Prime
+import Mathlib.Tactic.Basic
 
 -- Lemma 4.2: All prime numbers greater than 3 can be expressed in the form 6n + 1 or 6n - 1
 lemma lemma_4_2 (p : ℕ) (hp : p > 3) (hprime : Nat.Prime p) : ∃ n, p = 6 * n + 1 ∨ p = 6 * n - 1 :=
 by
- sorry
---working on this one now ... any contribution is much appreciated.
 
+  -- Consider the possible values for p % 6
+  have mod6_cases : p % 6 = 0 ∨ p % 6 = 1 ∨ p % 6 = 2 ∨ p % 6 = 3 ∨ p % 6 = 4 ∨ p % 6 = 5 :=
+    by exact Nat.mod_lt p (by norm_num)
 
+  -- Exclude the impossible cases for primes based on divisibility
+  cases mod6_cases with h0 hrest,
+  -- Case 1: p % 6 = 0
+  { exfalso,
+    -- Numbers of the form 6n are divisible by 6, and therefore cannot be prime unless p = 2 or 3.
+    -- But p > 3, so this is a contradiction.
+    have div_by_6 := Nat.dvd_of_mod_eq_zero h0,
+    have h6 := Nat.Prime.not_dvd_one hprime,
+    exact h6 (by rw [Nat.mod_eq_zero_of_dvd div_by_6]; exact dvd_rfl) },
+
+  cases hrest with h1 hrest,
+  -- Case 2: p % 6 = 1
+  { -- If p % 6 = 1, then p can be written as 6 * n + 1.
+    use p / 6,
+    left,
+    rw Nat.mod_add_div p 6,
+    exact h1 },
+
+  cases hrest with h2 hrest,
+  -- Case 3: p % 6 = 2
+  { exfalso,
+    -- Numbers of the form 6n + 2 are divisible by 2, and therefore cannot be prime unless p = 2.
+    -- But p > 3, so this is a contradiction.
+    have div_by_2 := Nat.dvd_of_mod_eq_zero h2,
+    exact Nat.Prime.not_dvd_two hprime div_by_2 },
+
+  cases hrest with h3 hrest,
+  -- Case 4: p % 6 = 3
+  { exfalso,
+    -- Numbers of the form 6n + 3 are divisible by 3, and therefore cannot be prime unless p = 3.
+    -- But p > 3, so this is a contradiction.
+    have div_by_3 := Nat.dvd_of_mod_eq_zero h3,
+    exact Nat.Prime.not_dvd_three hprime div_by_3 },
+
+  cases hrest with h4 h5,
+  -- Case 5: p % 6 = 4
+  { exfalso,
+    -- Numbers of the form 6n + 4 are divisible by 2, and therefore cannot be prime unless p = 2.
+    -- But p > 3, so this is a contradiction.
+    have div_by_2 := Nat.dvd_of_mod_eq_zero h4,
+    exact Nat.Prime.not_dvd_two hprime div_by_2 },
+
+  -- Case 6: p % 6 = 5
+  { -- If p % 6 = 5, then p can be written as 6 * n - 1.
+    use p / 6,
+    right,
+    rw Nat.mod_add_div p 6,
+    -- Rearrange the expression to match the form 6n - 1
+    have : p = 6 * (p / 6) + 5 := Nat.mod_add_div p 6,
+    linarith }
+
+krk -/
 
 
 
