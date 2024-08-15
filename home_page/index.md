@@ -6,7 +6,7 @@
 usemathjax: true
 ---
 
-Useful links:
+Useful Links:
 
 * [Zulip chat for Lean](https://leanprover.zulipchat.com/) for coordination
 * [Blueprint](blueprint/)
