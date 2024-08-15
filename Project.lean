@@ -4,8 +4,6 @@ import Mathlib.Tactic.Linarith
 import Mathlib.Data.Int.Defs
 import Mathlib.Tactic.Basic
 
-import Mathlib.Data.Nat.Dvd
-
 open List Nat
 
 -- DEFINITION 1. ....................................................................
