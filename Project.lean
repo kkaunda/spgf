@@ -73,6 +73,7 @@ by
 
 -- lean 4 code here
 
+
 -- LEMMA 4.3. .......................................................................
 -- Let TTi be a term in T where the indexes m, n >=0 and refer to the rows and columns in T
 -- respectively.
@@ -191,4 +192,6 @@ by
 -- lean 4 code here
 
 
+--
 -- END
+--
