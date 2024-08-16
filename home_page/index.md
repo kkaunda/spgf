@@ -7,7 +7,7 @@ usemathjax: true
 ---
 
 Let us lean together!
-![]({{ site.repository_url }}/vertopal_bfea56392a264e1da44fa95b98b2549d/media/image2.jpeg)
+![]({{ site.repository_url }}?raw=true/vertopal_bfea56392a264e1da44fa95b98b2549d/media/image2.jpeg)
 
 Welcome: Project status: work in progress.
 
@@ -135,31 +135,31 @@ from which **Theorem 2** is implied as seen in Table 3.
 
 **Table 1**
 
-![]({{ site.repository_url }}/vertopal_bfea56392a264e1da44fa95b98b2549d/media/image3.jpeg)
+![]({{ site.repository_url }}?raw=true/vertopal_bfea56392a264e1da44fa95b98b2549d/media/image3.jpeg)
 
 **Table Legend**
 
-![]({{ site.repository_url }}/vertopal_bfea56392a264e1da44fa95b98b2549d/media/image4.jpeg)
+![]({{ site.repository_url }}?raw=true/vertopal_bfea56392a264e1da44fa95b98b2549d/media/image4.jpeg)
 
 **Table 2**
 
-![]({{ site.repository_url }}/vertopal_bfea56392a264e1da44fa95b98b2549d/media/image5.jpeg)
+![]({{ site.repository_url }}?raw=true/vertopal_bfea56392a264e1da44fa95b98b2549d/media/image5.jpeg)
 
 
 **Table 3**
 
-![]({{ site.repository_url }}/vertopal_bfea56392a264e1da44fa95b98b2549d/media/image6.jpeg)
+![]({{ site.repository_url }}?raw=true/vertopal_bfea56392a264e1da44fa95b98b2549d/media/image6.jpeg)
 
 
 **Useful Links**
 
 * [Zulip chat for Lean](https://leanprover.zulipchat.com/) for coordination
-* [Blueprint]({{ site.repository_url }}/blueprint/)
-* [Blueprint as pdf]({{ site.repository_url }}/blueprint.pdf)
-* [Dependency graph]({{ site.repository_url }}/blueprint/dep_graph_document.html)
-* [Doc pages for this repository]({{ site.repository_url }}/docs/)
+* [Blueprint]({{ site.url }}/blueprint/)
+* [Blueprint as pdf]({{ site.url }}/blueprint.pdf)
+* [Dependency graph]({{ site.url }}/blueprint/dep_graph_document.html)
+* [Doc pages for this repository]({{ site.url }}/docs/)
 * Kaunda, K: [*Structure in Prime Gaps*](https://www.researchsquare.com/article/rs-4058806/latest), (2024). (Pre-print).
-* Monticone, P: Lean 4 Project [*Template*](https://pitmonticone.github.io/LeanProject/) for blueprint-driven formalization projects.
+* Pietro Monticone: [*Lean Project Template*](https://pitmonticone.github.io/LeanProject/) for blueprint-driven formalization projects.
 * Patrick Massot: [*LeanBlueprint*](https://github.com/PatrickMassot/leanblueprint/), A plasTeX plugin allowing to write blueprints for Lean 4 projects.
 
 
@@ -636,4 +636,4 @@ hope to contribute to the body of knowledge in mathematics as well as
 help establish the use of proof assistants like LEAN in academia,
 research and industry in general.
 
-![]({{ site.repository_url }}/vertopal_bfea56392a264e1da44fa95b98b2549d/media/image1.png)
+![]({{ site.repository_url }}?raw=true/vertopal_bfea56392a264e1da44fa95b98b2549d/media/image1.png)
