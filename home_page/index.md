@@ -9,7 +9,7 @@ usemathjax: true
 Let us lean together!
 ![](../vertopal_bfea56392a264e1da44fa95b98b2549d/media/image2.jpeg)
 
-Welcome: Project status: work in progress. 
+Welcome: Project status: work in progress.
 
 In this open community project, we formalize using the LEAN programming
 language, the definitions and results presented in the paper [*Structure
@@ -159,7 +159,7 @@ from which **Theorem 2** is implied as seen in Table 3.
 * [Dependency graph]({{ site.url }}/blueprint/dep_graph_document.html)
 * [Doc pages for this repository]({{ site.url }}/docs/)
 * Kaunda, K: [*Structure in Prime Gaps*](https://www.researchsquare.com/article/rs-4058806/latest), (2024). (Pre-print).
-* Monticone, P: Lean 4 Project Template for blueprint-driven formalization projects, [*https://pitmonticone.github.io/LeanProject/*](https://pitmonticone.github.io/LeanProject/).
+* Monticone, P: Lean 4 Project [*Template*](https://pitmonticone.github.io/LeanProject/) for blueprint-driven formalization projects.
 * Patrick Massot: [*LeanBlueprint*](https://github.com/PatrickMassot/leanblueprint/), A plasTeX plugin allowing to write blueprints for Lean 4 projects.
 
 
@@ -643,5 +643,3 @@ help establish the use of proof assistants like LEAN in academia,
 research and industry in general.
 
 ![](../vertopal_bfea56392a264e1da44fa95b98b2549d/media/image1.png)
-
-
