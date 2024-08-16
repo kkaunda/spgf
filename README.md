@@ -718,7 +718,7 @@ Gaps*](https://www.researchsquare.com/article/rs-4058806/latest),
 \[2\] Monticone, P: Lean 4 Project Template for blueprint-driven
 formalization projects, [*https://pitmonticone.github.io/LeanProject/*](https://pitmonticone.github.io/LeanProject/).
 
-\[3\] Patrick Massot: *LeanBlueprint*, A plasTeX plugin allowing to write blueprints for
+\[3\] Patrick Massot: [*LeanBlueprint*](https://github.com/PatrickMassot/leanblueprint/), A plasTeX plugin allowing to write blueprints for
 Lean 4 projects.
 
 \[4\] LEANPROVER ZULIP CHAT Community: [*https://leanprover.zulipchat.com/*](https://leanprover.zulipchat.com/).
