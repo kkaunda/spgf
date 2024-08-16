@@ -191,7 +191,7 @@ from which **Theorem 2** is implied as seen in Table 3.
 
 ![](vertopal_bfea56392a264e1da44fa95b98b2549d/media/image6.jpeg)
 
-**Formalization Strategy**
+## **Formalization Strategy**
 
 We design the Formalization Process section of this document as follows.
 For each item to be formalized, we will;
@@ -209,7 +209,7 @@ For each item to be formalized, we will;
 This way, all the resources *necessary* to re-produce the results of the
 process are in one document.
 
-**Deliverables**
+## **Deliverables**
 
 In addition to this document, we also provide the following:
 
@@ -228,7 +228,7 @@ In addition to this document, we also provide the following:
 -   [**ArXiv e-print Archive Document**](https://arxiv.org/): A LaTeX
     document of the formalization results.
 
-**The Formalization Process**
+## **The Formalization Process**
 
 The final LEAN4 code is most likely to be different from the individual code snippets but at the very least it is good to know and verify that formalization is possible with the current technology stack; LEAN4 and the Mathlib library.
 
@@ -370,8 +370,6 @@ def β1 : Beta := create_beta TT1
 
   -----------------------------------------------------------------------
 
-### Explanation
-
 **Item name**
 
 Lemma 4.1. This is the first Lemma.
@@ -404,8 +402,6 @@ by
   -----------------------------------------------------------------------
 
   -----------------------------------------------------------------------
-
-### Explanation
 
 **Item name**
 
@@ -526,8 +522,6 @@ which implies that *TT*<sub>i</sub>.*B* + *TT*<sub>i</sub>.*L* = *TT*<sub>i</sub
   -----------------------------------------------------------------------
 
   -----------------------------------------------------------------------
-
-### Explanation
 
 **Item name**
 
