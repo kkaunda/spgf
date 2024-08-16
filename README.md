@@ -2,13 +2,13 @@
 
 ## PROJECT PROPOSAL
 
-## prepared for: \https://leanprover.zulipchat.com/
+## prepared for: https://leanprover.zulipchat.com/
 
-## prepared by: \KAJANI KAUNDA
+## prepared by: KAJANI KAUNDA
 
 ![](vertopal_bfea56392a264e1da44fa95b98b2549d/media/image1.png)
 
-Lean community. Let us lean together!
+Let us lean together!
 ![](vertopal_bfea56392a264e1da44fa95b98b2549d/media/image2.jpeg)
 
 ```
@@ -107,7 +107,7 @@ within the mathematical community.
 
 Structure in Prime Gaps.
 
-In this paper, we aim to formalize the results presented in the article
+In this project, we aim to formalize the results presented in the article
 *Structure in Prime Gaps* using LEAN4, the latest version of the LEAN
 proof assistant. By leveraging the capabilities of LEAN4, we seek to
 ensure the correctness and robustness of these findings relating to the
@@ -230,7 +230,7 @@ In addition to this document, we also provide the following:
 
 ## **The Formalization Process**
 
-The final LEAN4 code is most likely to be different from the individual code snippets but at the very least it is good to know and verify that formalization is possible with the current technology stack; LEAN4 and the Mathlib library.
+The final LEAN4 code is most likely to be different from the following code snippets but at the very least it is good to know and verify that formalization is possible with the current technology stack; LEAN4 and the Mathlib library.
 
 We begin as follows:
 
