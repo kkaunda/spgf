@@ -7,7 +7,7 @@ usemathjax: true
 ---
 
 Let us lean together!
-![]({{ site.repository_url }}?raw=true/vertopal_bfea56392a264e1da44fa95b98b2549d/media/image2.jpeg)
+![]({{ site.repository_url }}/vertopal_bfea56392a264e1da44fa95b98b2549d/media/image2.jpeg?raw=true)
 
 Welcome: Project status: work in progress.
 
@@ -135,20 +135,20 @@ from which **Theorem 2** is implied as seen in Table 3.
 
 **Table 1**
 
-![]({{ site.repository_url }}?raw=true/vertopal_bfea56392a264e1da44fa95b98b2549d/media/image3.jpeg)
+![]({{ site.repository_url }}/vertopal_bfea56392a264e1da44fa95b98b2549d/media/image3.jpeg?raw=true)
 
 **Table Legend**
 
-![]({{ site.repository_url }}?raw=true/vertopal_bfea56392a264e1da44fa95b98b2549d/media/image4.jpeg)
+![]({{ site.repository_url }}/vertopal_bfea56392a264e1da44fa95b98b2549d/media/image4.jpeg?raw=true)
 
 **Table 2**
 
-![]({{ site.repository_url }}?raw=true/vertopal_bfea56392a264e1da44fa95b98b2549d/media/image5.jpeg)
+![]({{ site.repository_url }}/vertopal_bfea56392a264e1da44fa95b98b2549d/media/image5.jpeg?raw=true)
 
 
 **Table 3**
 
-![]({{ site.repository_url }}?raw=true/vertopal_bfea56392a264e1da44fa95b98b2549d/media/image6.jpeg)
+![]({{ site.repository_url }}/vertopal_bfea56392a264e1da44fa95b98b2549d/media/image6.jpeg?raw=true)
 
 
 **Useful Links**
@@ -636,4 +636,4 @@ hope to contribute to the body of knowledge in mathematics as well as
 help establish the use of proof assistants like LEAN in academia,
 research and industry in general.
 
-![]({{ site.repository_url }}?raw=true/vertopal_bfea56392a264e1da44fa95b98b2549d/media/image1.png)
+![]({{ site.repository_url }}/vertopal_bfea56392a264e1da44fa95b98b2549d/media/image1.png)
