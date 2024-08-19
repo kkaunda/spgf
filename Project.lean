@@ -3,6 +3,7 @@ import Mathlib.Data.List.Basic
 import Mathlib.Tactic.Linarith
 import Mathlib.Data.Int.Defs
 import Mathlib.Tactic.Basic
+import Mathlib.Tactic
 
 open List Nat
 
@@ -23,7 +24,7 @@ def cayley_table (n : ℕ) : List (List ℤ) :=
 -- Example of using the cayley_table with a finite portion
 def T : List (List ℤ) := cayley_table 30
 
-#eval T -- To visualize a portion of the table
+--- un-comment to print table: #eval T -- To visualize a portion of the table
 
 -- DEFINITION 2. ....................................................................
 -- Define a sub-array TTi of T, where v x w are its dimensions
@@ -33,7 +34,7 @@ def sub_array (T : List (List ℤ)) (r c v w : ℕ) : List (List ℤ) :=
 -- Example: Extract a 3x3 sub-array from T
 def TT1 : List (List ℤ) := sub_array T 1 1 3 3
 
-#eval TT1 -- Visualize the sub-array
+--- un-comment to see array: #eval TT1 -- Visualize the sub-array
 
 -- DEFINITION 3. ....................................................................
 -- Define the structure for the 4-tuple β
@@ -50,10 +51,12 @@ def create_beta (TTi : List (List ℤ)) : Beta :=
 -- Example usage: Create β for TT1
 def β1 : Beta := create_beta TT1
 
+/- un-comment to see elements:
 #eval β1.A -- Visualize β1
 #eval β1.B -- Visualize β1
 #eval β1.L -- Visualize β1
 #eval β1.E -- Visualize β1
+-/
 
 -- LEMMA 4.1. .......................................................................
 
@@ -62,8 +65,7 @@ lemma lemma_4_1 (m n c k : ℤ) :
   let TTi_B := m + (n + k)
   let TTi_L := (m + c) + n
   let TTi_E := (m + c) + (n + k)
-  TTi_B + TTi_L = TTi_A + TTi_E :=
-by
+  TTi_B + TTi_L = TTi_A + TTi_E :=  by
    linarith
 
 -- LEMMA 4.2. .......................................................................
@@ -72,7 +74,6 @@ by
 -- This lemma is a well-known result in number theory.
 
 -- lean 4 code here
-
 
 -- LEMMA 4.3. .......................................................................
 -- Let TTi be a term in T where the indexes m, n >=0 and refer to the rows and columns in T
@@ -117,7 +118,6 @@ by
 
 -- lean 4 code here
 
-
 -- LEMMA 4.4. .......................................................................
 -- Lemma 4.4
 -- Let any sub-array TTi that satisfies Lemma 4.3 be referred to as a Prime Array.
@@ -140,8 +140,6 @@ by
 
 -- lean 4 code here
 
-
-
 -- LEMMA 4.5. .......................................................................
 -- Lemma 4.5: Prove that: For every prime pα ≥ 5, there exists infinitely many Prime Arrays, TTi,
 -- such that TTi .A = pα − 3 and (Ti.B + 3) and ((Ti.B + 3) −Ti.E) are prime.
@@ -153,8 +151,6 @@ by
 -- We can then algebraically show that (TTi.B + 3) and ((TTi.B + 3) − TTi.E) are prime.
 
 -- lean 4 code here
-
-
 
 -- THEOREM 1. .......................................................................
 -- Theorem 1:	Prove that: For every prime pα, there exists infinitely many pairs of primes,
@@ -181,8 +177,6 @@ by
 
 -- lean 4 code here
 
-
-
 -- THEOREM 2. .......................................................................
 -- Theorem 2: Prove that there exist infinitely many pairs of primes with a gap of 2.
 -- Notes
@@ -190,7 +184,6 @@ by
 -- resolved by LEAN4 using the "refl" similar tactic.
 
 -- lean 4 code here
-
 
 --
 -- END
