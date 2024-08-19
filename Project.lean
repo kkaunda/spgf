@@ -188,9 +188,3 @@ lemma lemma_4_1 (m n c k : ℤ) :
 --
 -- END
 --
-
-def testingdefinition := "testing definition 1234"
-lemma testinglemma (n : ℕ) : n + 0 = n := sorry
-variable (a b : Nat)
-theorem theoremone: a = b := by sorry
-theorem theoremtwo: a = b := by sorry
