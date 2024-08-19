@@ -5,3 +5,22 @@
 % If you want to split the blueprint content into several files then
 % the current file can be a simple sequence of \input. Otherwise It
 % can start with a \section or \chapter for instance.
+
+\section{TESTING: Building Blueprint ...} 
+
+\begin{theorem}[Smale 1958]
+  \label{thm:theoremone}
+  \lean{theoremone}
+  \leanok
+  \uses{def:testingdefinition}
+  There is a homotopy of immersions of $𝕊^2$ into $ℝ^3$ from the inclusion map to
+  the antipodal map $a : q ↦ -q$.
+\end{theorem}
+  
+\begin{proof}
+  \leanok
+  \uses{thm:theoremtwo, lem:testinglemma}
+  This obviously follows from what we did so far.
+\end
+
+
