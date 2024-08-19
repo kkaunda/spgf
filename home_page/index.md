@@ -7,7 +7,7 @@ usemathjax: true
 ---
 
 Let us lean together!
-![](../vertopal_bfea56392a264e1da44fa95b98b2549d/media/image2.jpeg)
+![]({{ site.repository_url }}/vertopal_bfea56392a264e1da44fa95b98b2549d/media/image2.jpeg?raw=true)
 
 Welcome: Project status: work in progress.
 
@@ -135,20 +135,20 @@ from which **Theorem 2** is implied as seen in Table 3.
 
 **Table 1**
 
-![](../vertopal_bfea56392a264e1da44fa95b98b2549d/media/image3.jpeg)
+![]({{ site.repository_url }}/vertopal_bfea56392a264e1da44fa95b98b2549d/media/image3.jpeg?raw=true)
 
 **Table Legend**
 
-![](../vertopal_bfea56392a264e1da44fa95b98b2549d/media/image4.jpeg)
+![]({{ site.repository_url }}/vertopal_bfea56392a264e1da44fa95b98b2549d/media/image4.jpeg?raw=true)
 
 **Table 2**
 
-![](../vertopal_bfea56392a264e1da44fa95b98b2549d/media/image5.jpeg)
+![]({{ site.repository_url }}/vertopal_bfea56392a264e1da44fa95b98b2549d/media/image5.jpeg?raw=true)
 
 
 **Table 3**
 
-![](../vertopal_bfea56392a264e1da44fa95b98b2549d/media/image6.jpeg)
+![]({{ site.repository_url }}/vertopal_bfea56392a264e1da44fa95b98b2549d/media/image6.jpeg?raw=true)
 
 
 **Useful Links**
@@ -159,7 +159,7 @@ from which **Theorem 2** is implied as seen in Table 3.
 * [Dependency graph]({{ site.url }}/blueprint/dep_graph_document.html)
 * [Doc pages for this repository]({{ site.url }}/docs/)
 * Kaunda, K: [*Structure in Prime Gaps*](https://www.researchsquare.com/article/rs-4058806/latest), (2024). (Pre-print).
-* Monticone, P: Lean 4 Project [*Template*](https://pitmonticone.github.io/LeanProject/) for blueprint-driven formalization projects.
+* Pietro Monticone: [*Lean Project Template*](https://pitmonticone.github.io/LeanProject/) for blueprint-driven formalization projects.
 * Patrick Massot: [*LeanBlueprint*](https://github.com/PatrickMassot/leanblueprint/), A plasTeX plugin allowing to write blueprints for Lean 4 projects.
 
 
@@ -636,4 +636,4 @@ hope to contribute to the body of knowledge in mathematics as well as
 help establish the use of proof assistants like LEAN in academia,
 research and industry in general.
 
-![](../vertopal_bfea56392a264e1da44fa95b98b2549d/media/image1.png)
+![]({{ site.repository_url }}/vertopal_bfea56392a264e1da44fa95b98b2549d/media/image1.png)

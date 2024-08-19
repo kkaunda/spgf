@@ -709,8 +709,7 @@ research and industry in general.
 Gaps*](https://www.researchsquare.com/article/rs-4058806/latest),
 (2024).
 
-\[2\] Monticone, P: Lean 4 Project Template for blueprint-driven
-formalization projects, [*https://pitmonticone.github.io/LeanProject/*](https://pitmonticone.github.io/LeanProject/).
+\[2\] Monticone, P: Lean 4 Project [*Template*](https://pitmonticone.github.io/LeanProject/) for blueprint-driven formalization projects.
 
 \[3\] Patrick Massot: [*LeanBlueprint*](https://github.com/PatrickMassot/leanblueprint/), A plasTeX plugin allowing to write blueprints for
 Lean 4 projects.
