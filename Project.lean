@@ -76,47 +76,6 @@ lemma lemma_4_1 (m n c k : ℤ) :
 
 -- lean 4 code here
 
--- ##################################################################################
-
--- lemma lemma_a (k : Nat) : ∃ k : Nat, (6 * k) + 5 = (6 * (k + 1)) - 1 := by linarith
-/-
-lemma lemma_a (k : Nat) : ∃ k : Nat, (6 * k) + 5 = (6 * (k + 1)) - 1 := by
-  use k
-  calc
-    (6 * k) + 5 = (6 * k) + 6 - 1 := by rfl
-    ... = 6 * (k + 1) - 1 := by ring
--/
-
-/-
-lemma lemma_a (k : Nat) : ∃ k : Nat, (6 * k) + 5 = (6 * (k + 1)) - 1 := by
-  use k
-  ring
--/
-/-
-lemma lemma_a (k : Nat) : ∃ k : Nat, (6 * k) + 5 = (6 * (k + 1)) - 1 := by
-  use k
-  ring_nf
--/
-/-
-lemma lemma_a (k : Nat) : ∃ k : Nat, (6 * k) + 5 = (6 * (k + 1)) - 1 := by
-  use k
-  calc
-    (6 * k) + 5 = 6 * k + 6 - 1 : by ring
-              ... = 6 * (k + 1) - 1 : by ring
--/
-
-/-
-lemma lemma_a (k : Nat) : ∃ k : Nat, (6 * k) + 5 = (6 * (k + 1)) - 1 :=
-  by
-    calc
-      (6 * k) + 5 = 6 * k + 6 - 1 : by ring -- Simplify the expression
-      _ = (6 * (k + 1)) - 1 : by ring -- Final result
-    exists k
--/
-
-
--- ##################################################################################
-
 -- LEMMA 4.3. .......................................................................
 -- Let TTi be a term in T where the indexes m, n >=0 and refer to the rows and columns in T
 -- respectively.
@@ -223,7 +182,7 @@ lemma lemma_a (k : Nat) : ∃ k : Nat, (6 * k) + 5 = (6 * (k + 1)) - 1 :=
 -- Theorem 2: Prove that there exist infinitely many pairs of primes with a gap of 2.
 -- Notes
 -- This result is just a special case of Theorem 1 when pα is set to 5. I am sure this would be
--- resolved by LEAN4 using the "refl" similar tactic.
+-- resolved by LEAN 4 using the "refl" similar tactic.
 
 -- lean 4 code here
 
