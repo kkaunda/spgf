@@ -25,90 +25,81 @@ The goal of this document is to provide a formalized version of various mathemat
 
 \chapter{The Cayley Table T}
 
-\begin{definition}[The Cayley Table T]
-\label{Cayley-Table-T}
-\leanok
-\lean{T}
-% \uses{label1, labe2, label3}
-We define a Cayley Table named T constructed from a Cummutative Partial Groupoid (J, +) based on a subset J of Z         containing the infinite set of prime numbers and their additive inverses, such that the elements of the first row of T        are the primes and the elements of the first column of T are their additive inverses.
-\end{definition}
-
 \chapter{The Sub-Array: $TT_i$}
 
-Definition 2: Define a v x w sub-array TTi of T such that v, w ≥ 2.
+%Definition 2: Define a v x w sub-array TTi of T such that v, w ≥ 2.
 
 \chapter{The 4-tuple $\beta$ = (A, B, L, E)}
 
-Definition 3: Define a 4-tuple β = (A, B, L, E) such that the values of its elements are the vertices of TTi.
+%Definition 3: Define a 4-tuple β = (A, B, L, E) such that the values of its elements are the vertices of TTi.
 
 \chapter{Lemma 4.1}
 
-Lemma 4.1 : Prove that: given a 4-tuple TTi.β then TTi.β.A + TTi.β.E = TTi.β.B + TTi.β.L.
-
+%Lemma 4.1 : Prove that: given a 4-tuple TTi.β then TTi.β.A + TTi.β.E = TTi.β.B + TTi.β.L.
 
 \chapter{Lemma 4.2}
 
-Lema 4.2 : Prove that: All prime numbers greater than 3 can be expressed in the form 6n + 1 or 6n − 1.
+%Lema 4.2 : Prove that: All prime numbers greater than 3 can be expressed in the form 6n + 1 or 6n − 1.
 
 \chapter{Lemma 4.3}
 
-Let tm,n be a term in T where the indexes m and n are zero based and refer to the rows and columns in T respectively.
+%Let tm,n be a term in T where the indexes m and n are zero based and refer to the rows and columns in T respectively.
 
-Prove that: 
+%Prove that: 
 
-For every prime pα ≥ 5, there exists a sub-array TTi ∈ T such that the following properties are simultaneously true;
+%For every prime pα ≥ 5, there exists a sub-array TTi ∈ T such that the following properties are simultaneously true;
 
-Property 1 : TTi.β.A + 3 ∈ {6n ± 1|n ∈ N1}
+%Property 1 : TTi.β.A + 3 ∈ {6n ± 1|n ∈ N1}
 
-Property 2 : (TTi.β.B + 3) − TTi.β.E ∈ {6n ± 1|n ∈ N1}
+%Property 2 : (TTi.β.B + 3) − TTi.β.E ∈ {6n ± 1|n ∈ N1}
 
-Property 3 : TTi.β.L ≡ 0 (mod 6)
+%Property 3 : TTi.β.L ≡ 0 (mod 6)
 
-Property 4 : TTi.β.A = TTi.β.E
+%Property 4 : TTi.β.A = TTi.β.E
 
-Property 5 : TTi.β.B + 3 ∈ {6n ± 1|n ∈ N1}
+%Property 5 : TTi.β.B + 3 ∈ {6n ± 1|n ∈ N1}
 
-If and only if
+%If and only if
 
-for TTi.β.A + 3 ∈ {6n − 1|n ∈ N1};
+%for TTi.β.A + 3 ∈ {6n − 1|n ∈ N1};
 
-TTi.β.A = 6x + 6y − 4 
+%TTi.β.A = 6x + 6y − 4 
 
-TTi.β.B = 6x + 12y − 8 
+%TTi.β.B = 6x + 12y − 8 
 
-TTi.β.L = 6x
+%TTi.β.L = 6x
 
-TTi.β.E = 6x + 6y − 4
+%TTi.β.E = 6x + 6y − 4
 
-for TTi.β.A + 3 ∈ {6n + 1|n ∈ N1};
+%for TTi.β.A + 3 ∈ {6n + 1|n ∈ N1};
 
-TTi.β.A = 6x + 6y − 2 
+%TTi.β.A = 6x + 6y − 2 
 
-TTi.β.B = 6x + 12y − 4 
+%TTi.β.B = 6x + 12y − 4 
 
-TTi.β.L = 6x 
+%TTi.β.L = 6x 
 
-TTi.β.E = 6x + 6y − 2
+%TTi.β.E = 6x + 6y − 2
 
-where n ∈ N1, x < n, y > 0, n = x + y, (TTi.β.A + 3) = pα and TTi.β.A = t2,k.
+%where n ∈ N1, x < n, y > 0, n = x + y, (TTi.β.A + 3) = pα and TTi.β.A = t2,k.
 
 \chapter{Lemma 4.4}
 
-Lemma 4.4: Let any sub-array TTi that satisfies Lemma 4.3 be referred to as a Prime Array.
+%Lemma 4.4: Let any sub-array TTi that satisfies Lemma 4.3 be referred to as a Prime Array.
 
-Prove that: For every prime pα ≥ 5, there are infinitely many Prime Arrays such that TTi.β.A = pα − 3.
+%Prove that: For every prime pα ≥ 5, there are infinitely many Prime Arrays such that TTi.β.A = pα − 3.
 
 \chapter{Lemma 4.5}
 
-Lemma 4.5: Prove that: For every prime pα ≥ 5, there exists infinitely many Prime Arrays, TTi, such that TTi.β.A = pα − 3 and (Ti.β.B + 3) and ((Ti.β.B + 3) −Ti.β.E) are prime.
+%Lemma 4.5: Prove that: For every prime pα ≥ 5, there exists infinitely many Prime Arrays, TTi, such that TTi.β.A = pα − 3 %and (Ti.β.B + 3) and ((Ti.β.B + 3) −Ti.β.E) are prime.
 
 \chapter{Theorem 1}
 
-Theorem 1: Prove that: For every prime pα, there exists infinitely many pairs of primes, (pn, pn+m), such that (pn+m − pn) = pα − 3, where n, α ≥ 3, m ≥ 1, and pn is the nth prime.
+%Theorem 1: Prove that: For every prime pα, there exists infinitely many pairs of primes, (pn, pn+m), such that (pn+m − pn) = %pα − 3, where n, α ≥ 3, m ≥ 1, and pn is the nth prime.
 
 \chapter{Theorem 2}
 
-Theorem 2: Prove that there exist infinitely many pairs of primes with a gap of 2.
+%Theorem 2: Prove that there exist infinitely many pairs of primes with a gap of 2.
 
 
 
