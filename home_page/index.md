@@ -67,8 +67,8 @@ within the mathematical community.
 Structure in Prime Gaps.
 
 In this project, we aim to formalize the results presented in the article
-*Structure in Prime Gaps* using LEAN4, the latest version of the LEAN
-proof assistant. By leveraging the capabilities of LEAN4, we seek to
+*Structure in Prime Gaps* using LEAN 4, the latest version of the LEAN
+proof assistant. By leveraging the capabilities of LEAN 4, we seek to
 ensure the correctness and robustness of these findings relating to the
 existence of infinitely many *structured* gaps between prime numbers.
 This formalization will provide a rigorous foundation for the results
@@ -165,7 +165,7 @@ from which **Theorem 2** is implied as seen in Table 3.
 
 **The definitions and results to formalize**
 
-The final LEAN4 code is most likely to be different from the following code snippets but at the very least it is good to know and verify that formalization is possible with the current technology stack; LEAN4 and the Mathlib library.
+The final LEAN 4 code will most likely be different from the following code snippets but at the very least it is good to know and verify that formalization is possible with the current technology stack; LEAN 4 and the Mathlib library.
 
 **Item name**
 
@@ -184,10 +184,10 @@ additive inverses.
 
 The set *J* is defined as follows *J* = (\...,−*p*<sub>n+2</sub>, −*p*<sub>n+1</sub>,
 −*p*<sub>n</sub>, *p*<sub>n</sub>, p<sub>n+1</sub>, *p*<sub>n+2</sub>, \...). Notice that since primes are
-infinite then by definition the structure T is also infinite. The structures used by LEAN4 in defining *T* must reflect
+infinite then by definition the structure T is also infinite. The structures used by LEAN 4 in defining *T* must reflect
 this property.
 
-**LEAN4 code**
+**LEAN 4 code**
 ```
 import Mathlib.Data.Nat.Prime.Basic
 import Mathlib.Data.List.Basic
@@ -216,7 +216,7 @@ def T : List (List ℤ) := cayley_table 30
 #eval T -- To visualize a portion of the table
 ```
 
-**LEAN4 code annotation**
+**LEAN 4 code annotation**
 
   -----------------------------------------------------------------------
 
@@ -236,7 +236,7 @@ construct a pattern.
 
 > Example: *TT*<sub>1</sub> = ((2, 4, 8, 10), (0, 2, 6, 8), (-2, 0, 4, 6), (-6, -4, 0, 2)).
 
-**LEAN4 code**
+**LEAN 4 code**
 ```
 -- Define a sub-array TTi of T, where v x w are its dimensions
 def sub_array (T : List (List ℤ)) (r c v w : ℕ) : List (List ℤ) :=
@@ -248,7 +248,7 @@ def TT1 : List (List ℤ) := sub_array T 1 1 3 3
 #eval TT1 -- Visualize the sub-array
 ```
 
-**LEAN4 code annotation**
+**LEAN 4 code annotation**
 
   -----------------------------------------------------------------------
 
@@ -269,7 +269,7 @@ This is one of the structures used in the analysis of *T*.
 
 > Example: for *TT*<sub>1</sub>, we have *TT*<sub>1</sub>.*β* = (2, 10, -6, 2).
 
-**LEAN4 code**
+**LEAN 4 code**
 ```
 -- Define the structure for the 4-tuple β
 structure Beta where
@@ -297,7 +297,7 @@ def β1 : Beta := create_beta TT1
 #eval β1.E -- Visualize β1
 ```
 
-**LEAN4 code annotation**
+**LEAN 4 code annotation**
 
   -----------------------------------------------------------------------
 
@@ -317,7 +317,7 @@ This is one of the results used in the subsequent proofs.
 
 The proof is derived from the construction of *T*.
 
-**LEAN4 code**
+**LEAN 4 code**
 ```
 lemma lemma_4_1 (m n c k : ℤ) :
   let TTi_A := m + n
@@ -330,7 +330,7 @@ by
   linarith
 ```
 
-**LEAN4 code annotation**
+**LEAN 4 code annotation**
 
   -----------------------------------------------------------------------
 
@@ -350,13 +350,13 @@ Lemma 4.2. This is the second Lemma.
 
 This result is used in the subsequent proofs.
 
-**LEAN4 code**
+**LEAN 4 code**
 
   -----------------------------------------------------------------------
 
   -----------------------------------------------------------------------
 
-**LEAN4 code annotation**
+**LEAN 4 code annotation**
 
   -----------------------------------------------------------------------
 
@@ -444,13 +444,13 @@ which implies that *TT*<sub>i</sub>.*B* + *TT*<sub>i</sub>.*L* = *TT*<sub>i</sub
 ((6*x +* 6*y* + -4) + (6*x +* 6*y +* -4)) or ((6*x +* 6*y +* -2) + (6*x
 +* 6*y +* -2)) depending on which form *p*<sub>α</sub> can be expressed.
 
-**LEAN4 code**
+**LEAN 4 code**
 
   -----------------------------------------------------------------------
 
   -----------------------------------------------------------------------
 
-**LEAN4 code annotation**
+**LEAN 4 code annotation**
 
   -----------------------------------------------------------------------
 
@@ -493,13 +493,13 @@ The key in the proof is to show that for any prime *p*<sub>α</sub> ≥ 5,
     and each change represents a different sub-array or *Prime Array*
     *TT*<sub>i</sub>.
 
-**LEAN4 code**
+**LEAN 4 code**
 
   -----------------------------------------------------------------------
 
   -----------------------------------------------------------------------
 
-**LEAN4 code annotation**
+**LEAN 4 code annotation**
 
   -----------------------------------------------------------------------
 
@@ -528,13 +528,13 @@ on the first row of *T* are prime
 We can then algebraically show that (*TT*<sub>i</sub>.*B* + 3) and
 ((*TT*<sub>i</sub>.*B* + 3) − *TT*<sub>i</sub>.*E*) are prime.
 
-**LEAN4 code**
+**LEAN 4 code**
 
   -----------------------------------------------------------------------
 
   -----------------------------------------------------------------------
 
-**LEAN4 code annotation**
+**LEAN 4 code annotation**
 
   -----------------------------------------------------------------------
 
@@ -589,13 +589,13 @@ can be is re-stated using the following equivalent assignments:
 >
 > *p*<sub>n+m</sub> − *p*<sub>n</sub> = *TT*<sub>i</sub>.*E.*
 
-**LEAN4 code**
+**LEAN 4 code**
 
   -----------------------------------------------------------------------
 
   -----------------------------------------------------------------------
 
-**LEAN4 code annotation**
+**LEAN 4 code annotation**
 
   -----------------------------------------------------------------------
 
@@ -613,16 +613,16 @@ results.
 **Notes**
 
 This result is just a special case of Theorem 1 when *p*<sub>α</sub> is set to 5.
-I am sure this would be resolved by LEAN4 using the \"refl\" similar
+I am sure this would be resolved by LEAN 4 using the \"refl\" similar
 tactic.
 
-**LEAN4 code**
+**LEAN 4 code**
 
   -----------------------------------------------------------------------
 
   -----------------------------------------------------------------------
 
-**LEAN4 code annotation**
+**LEAN 4 code annotation**
 
   -----------------------------------------------------------------------
 
