@@ -76,6 +76,47 @@ lemma lemma_4_1 (m n c k : ℤ) :
 
 -- lean 4 code here
 
+
+-- import Mathlib.Data.Nat.Prime
+
+lemma primes_of_form_6n_plus_minus_1 (p : ℕ) (hp : Nat.Prime p) (h : p > 3) :
+  ∃ n : ℕ, p = 6 * n + 1 ∨ p = 6 * n - 1 :=
+begin
+  -- We use a proof by contradiction.
+  by_contra hnot,
+  -- Since p > 3, p must have one of the following forms mod 6:
+  -- 0, 1, 2, 3, 4, or 5.
+  have hmod : p % 6 = 0 ∨ p % 6 = 1 ∨ p % 6 = 2 ∨ p % 6 = 3 ∨ p % 6 = 4 ∨ p % 6 = 5 :=
+    Nat.mod_lt p (by norm_num),
+
+  -- We will exclude each case that does not match the form 6n + 1 or 6n - 1.
+  cases hmod with h0 hmod,
+  -- Case 1: p % 6 = 0, so p is divisible by 6. Contradiction.
+  { exfalso,
+    exact Nat.Prime.not_dvd_one hp (by rw [Nat.mod_eq_zero_of_dvd, Nat.dvd_mul_right]; exact Nat.dvd_mul_right 2 3) },
+
+  -- Case 2: p % 6 = 1, this is of the form 6n + 1, which contradicts our assumption.
+  { exact hnot ⟨p / 6, Or.inl (by rw [Nat.div_add_mod, hmod])⟩ },
+
+  -- Case 3: p % 6 = 2, so p is divisible by 2. Contradiction.
+  { exfalso,
+    exact Nat.Prime.not_dvd_two hp (by rw [←Nat.mod_add_div p 6, hmod]; exact Nat.mul_dvd_mul_left 2 (Nat.dvd_of_mod_eq_zero (by norm_num))) },
+
+  -- Case 4: p % 6 = 3, so p is divisible by 3. Contradiction.
+  { exfalso,
+    exact Nat.Prime.not_dvd_three hp (by rw [←Nat.mod_add_div p 6, hmod]; exact Nat.mul_dvd_mul_left 3 (Nat.dvd_of_mod_eq_zero (by norm_num))) },
+
+  -- Case 5: p % 6 = 4, so p is divisible by 2. Contradiction.
+  { exfalso,
+    exact Nat.Prime.not_dvd_two hp (by rw [←Nat.mod_add_div p 6, hmod]; exact Nat.mul_dvd_mul_left 2 (Nat.dvd_of_mod_eq_zero (by norm_num))) },
+
+  -- Case 6: p % 6 = 5, this is of the form 6n - 1, which contradicts our assumption.
+  { exact hnot ⟨p / 6, Or.inr (by rw [Nat.div_add_mod, hmod])⟩ },
+end
+
+
+
+
 -- LEMMA 4.3. .......................................................................
 -- Let TTi be a term in T where the indexes m, n >=0 and refer to the rows and columns in T
 -- respectively.

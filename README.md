@@ -191,44 +191,8 @@ from which **Theorem 2** is implied as seen in Table 3.
 
 ![](vertopal_bfea56392a264e1da44fa95b98b2549d/media/image6.jpeg)
 
-## **Formalization Strategy**
 
-We design the Formalization Process section of this document as follows.
-For each item to be formalized, we will;
-
--   **Item name** : Name the item to be formalized.
-
--   **Formal statement** : Formally state the item to be formalized.
-
--   **Note** : Provide explanation notes.
-
--   **LEAN 4 code** : Provide the LEAN 4 code.
-
--   **Annotation** : Provide annotation of the LEAN 4 code.
-
-This way, all the resources *necessary* to re-produce the results of the
-process are in one document.
-
-## **Deliverables**
-
-In addition to this document, we also provide the following:
-
--   **Blueprint**: a blueprint document of the formalization.
-
--   **Documentation**: documentation of the formalization.
-
--   **Source Paper**: a link to the paper Structure in Prime Gaps.
-
--   **Formalization Repository**: a link to a GitHub repository of the
-    formalization.
-
--   **Website**: We will host it using the simple and free "Github
-    Pages" facility.
-
--   [**ArXiv e-print Archive Document**](https://arxiv.org/): A LaTeX
-    document of the formalization results.
-
-## **The Formalization Process**
+## **Definitions and results to be Formalized**
 
 The final LEAN 4 code will most likely be different from the following code snippets but at the very least it is good to know and verify that formalization is possible with the current technology stack; LEAN 4 and the Mathlib library.
 
@@ -708,10 +672,10 @@ research and industry in general.
 **Useful Links**
 
 * [Zulip chat for Lean](https://leanprover.zulipchat.com/) for coordination
-* [Blueprint]({{ site.url }}/blueprint/)
-* [Blueprint as pdf]({{ site.url }}/blueprint.pdf)
-* [Dependency graph]({{ site.url }}/blueprint/dep_graph_document.html)
-* [Doc pages for this repository]({{ site.url }}/docs/)
+* [Blueprint](https://kkaunda.github.io/spgf/blueprint/)
+* [Blueprint as pdf](https://kkaunda.github.io/spgf/blueprint.pdf)
+* [Dependency graph](https://kkaunda.github.io/spgf/blueprint/dep_graph_document.html)
+* [Doc pages for this repository](https://kkaunda.github.io/spgf/docs/)
 * Kaunda, K: [*Structure in Prime Gaps*](https://www.researchsquare.com/article/rs-4058806/latest), (2024). (Pre-print).
 * Pietro Monticone: [*Lean Project Template*](https://pitmonticone.github.io/LeanProject/) for blueprint-driven formalization projects.
 * Patrick Massot: [*LeanBlueprint*](https://github.com/PatrickMassot/leanblueprint/), A plasTeX plugin allowing to write blueprints for Lean 4 projects.
