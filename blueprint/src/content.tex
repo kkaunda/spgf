@@ -6,6 +6,15 @@
 % the current file can be a simple sequence of \input. Otherwise It
 % can start with a \section or \chapter for instance.
 
+
+% In this file you should put the actual content of the blueprint.
+% It will be used both by the web and the print version.
+% It should *not* include the \begin{document}
+%
+% If you want to split the blueprint content into several files then
+% the current file can be a simple sequence of \input. Otherwise It
+% can start with a \section or \chapter for instance.
+
 \title{Structure in Prime Gaps}
 
 \date{\today}
@@ -20,28 +29,28 @@ In this paper we formalize the results presented in the article "Structure in Pr
 
 \textbf{Acknowledgements}: We are grateful to everyone who has helped in the formalization of these results. 
 
-\chapter{Introduction}
+\section{Introduction}
 The goal of this document is to provide a formalized version of various mathematical claims, definitions, and proofs from the paper "Structure in Prime Gaps" using Lean 4. This paper will then serve as a blueprint for the resulting code written in Lean 4.
 
-\chapter{The Cayley Table T}
+\section{The Cayley Table T}
 
-\chapter{The Sub-Array: $TT_i$}
+\section{The Sub-Array: $TT_i$}
 
 %Definition 2: Define a v x w sub-array TTi of T such that v, w ≥ 2.
 
-\chapter{The 4-tuple $\beta$ = (A, B, L, E)}
+\section{The 4-tuple $\beta$ = (A, B, L, E)}
 
 %Definition 3: Define a 4-tuple β = (A, B, L, E) such that the values of its elements are the vertices of TTi.
 
-\chapter{Lemma 4.1}
+\section{Lemma 4.1}
 
 %Lemma 4.1 : Prove that: given a 4-tuple TTi.β then TTi.β.A + TTi.β.E = TTi.β.B + TTi.β.L.
 
-\chapter{Lemma 4.2}
+\section{Lemma 4.2}
 
 %Lema 4.2 : Prove that: All prime numbers greater than 3 can be expressed in the form 6n + 1 or 6n − 1.
 
-\chapter{Lemma 4.3}
+\section{Lemma 4.3}
 
 %Let tm,n be a term in T where the indexes m and n are zero based and refer to the rows and columns in T respectively.
 
@@ -83,41 +92,24 @@ The goal of this document is to provide a formalized version of various mathemat
 
 %where n ∈ N1, x < n, y > 0, n = x + y, (TTi.β.A + 3) = pα and TTi.β.A = t2,k.
 
-\chapter{Lemma 4.4}
+\section{Lemma 4.4}
 
 %Lemma 4.4: Let any sub-array TTi that satisfies Lemma 4.3 be referred to as a Prime Array.
 
 %Prove that: For every prime pα ≥ 5, there are infinitely many Prime Arrays such that TTi.β.A = pα − 3.
 
-\chapter{Lemma 4.5}
+\section{Lemma 4.5}
 
 %Lemma 4.5: Prove that: For every prime pα ≥ 5, there exists infinitely many Prime Arrays, TTi, such that TTi.β.A = pα − 3 %and (Ti.β.B + 3) and ((Ti.β.B + 3) −Ti.β.E) are prime.
 
-\chapter{Theorem 1}
+\section{Theorem 1}
 
 %Theorem 1: Prove that: For every prime pα, there exists infinitely many pairs of primes, (pn, pn+m), such that (pn+m − pn) = %pα − 3, where n, α ≥ 3, m ≥ 1, and pn is the nth prime.
 
-\chapter{Theorem 2}
+\section{Theorem 2}
 
 %Theorem 2: Prove that there exist infinitely many pairs of primes with a gap of 2.
 
 
-
-
-
-
-\printbibliography
-
-
-
-
-
-
-
-
-
-
-
-
-
+%\printbibliography
 
