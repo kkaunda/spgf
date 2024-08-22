@@ -74,6 +74,10 @@ lemma lemma_4_1 (m n c k : ℤ) :
 -- Lemma 4.2: All Primes Greater Than 3 are of the Form 6n ± 1
 -- This lemma is a well-known result in number theory.
 
+lemma lemma_4_2 (p : ℕ) (hp : Nat.Prime p) (h : p > 3) : ∃ n : ℕ, p = 6 * n + 1 ∨ p = 6 * n - 1 := by
+sorry
+
+
 -- lean 4 code here
 
 -- LEMMA 4.3. .......................................................................
