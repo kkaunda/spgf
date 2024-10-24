@@ -41,7 +41,7 @@ def T : List (List ℤ) := cayley_table 30
 
 # **Structure in Prime Gaps -- Formalized**
 
-## **By Kajani Kaunda, Jane Doe, John Doe, and others.**
+## **By Kajani Kaunda and others.**
 
 ## **Abstract**
 
