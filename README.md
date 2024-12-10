@@ -12,31 +12,27 @@ Let us lean together!
 ![](vertopal_bfea56392a264e1da44fa95b98b2549d/media/image2.jpeg)
 
 ```
+import Mathlib
 import Mathlib.Data.Nat.Prime.Basic
 import Mathlib.Data.List.Basic
 import Mathlib.Tactic.Linarith
 import Mathlib.Data.Int.Defs
 import Mathlib.Tactic.Basic
+import Mathlib.Data.Finset.Basic
+import Mathlib.Tactic.ModCases
+import Mathlib.Data.Set.Basic
+import Mathlib.Tactic.NormNum
+import Mathlib.Algebra.ModEq
 
 open List Nat
 
--- Define the set of primes and their additive inverses
-def primes_and_inverses : List ℤ :=
-  (List.range 100).filter Nat.Prime |>.map (λ p => [↑p, -↑p]) |> List.join
-
--- Construct the Cayley table T for a finite portion
+-- Define a finite portion of a Cayley table.
 def cayley_table (n : ℕ) : List (List ℤ) :=
   let primes := (List.range n).filter Nat.Prime |>.map (λ p => ↑p)
   let inverses := primes.map (λ p => -p)
-  let first_row := primes
-  let first_column := inverses
-  let table := first_column.map (λ inv => first_row.map (λ p => p + inv))
+  let first_row := 0 :: primes
+  let table := inverses.map (λ inv => inv :: (primes.map (λ p => p + inv)))
   first_row :: table
-
--- Example of using the cayley_table with a finite portion
-def T : List (List ℤ) := cayley_table 30
-
-#eval T -- To visualize a portion of the table
 ```
 
 # **Structure in Prime Gaps -- Formalized**
@@ -198,8 +194,6 @@ The final LEAN 4 code will most likely be different from the following code snip
 
 We begin as follows:
 
-**Item name**
-
 Definition 1.
 
 **Formal statement**
@@ -218,41 +212,9 @@ The set *J* is defined as follows *J* = (\...,−*p*<sub>n+2</sub>, −*p*<sub>n
 infinite then by definition the structure T is also infinite. The structures used by LEAN 4 in defining *T* must reflect
 this property.
 
-**LEAN 4 code**
-```
-import Mathlib.Data.Nat.Prime.Basic
-import Mathlib.Data.List.Basic
-import Mathlib.Tactic.Linarith
-import Mathlib.Data.Int.Defs
-import Mathlib.Tactic.Basic
 
-open List Nat
-
--- Define the set of primes and their additive inverses
-def primes_and_inverses : List ℤ :=
-  (List.range 100).filter Nat.Prime |>.map (λ p => [↑p, -↑p]) |> List.join
-
--- Construct the Cayley table T for a finite portion
-def cayley_table (n : ℕ) : List (List ℤ) :=
-  let primes := (List.range n).filter Nat.Prime |>.map (λ p => ↑p)
-  let inverses := primes.map (λ p => -p)
-  let first_row := primes
-  let first_column := inverses
-  let table := first_column.map (λ inv => first_row.map (λ p => p + inv))
-  first_row :: table
-
--- Example of using the cayley_table with a finite portion
-def T : List (List ℤ) := cayley_table 30
-
-#eval T -- To visualize a portion of the table
-```
-
-**LEAN 4 code annotation**
 
   -----------------------------------------------------------------------
-
-  -----------------------------------------------------------------------
-**Item name**
 
 Definition 2.
 
@@ -267,25 +229,7 @@ construct a pattern.
 
 > Example: *TT*<sub>1</sub> = ((2, 4, 8, 10), (0, 2, 6, 8), (-2, 0, 4, 6), (-6, -4, 0, 2)).
 
-**LEAN 4 code**
-```
--- Define a sub-array TTi of T, where v x w are its dimensions
-def sub_array (T : List (List ℤ)) (r c v w : ℕ) : List (List ℤ) :=
-  (T.drop r).take v |>.map (λ row => (row.drop c).take w)
-
--- Example: Extract a 3x3 sub-array from T
-def TT1 : List (List ℤ) := sub_array T 1 1 3 3
-
-#eval TT1 -- Visualize the sub-array
-```
-
-**LEAN 4 code annotation**
-
   -----------------------------------------------------------------------
-
-  -----------------------------------------------------------------------
-
-**Item name**
 
 Definition 3.
 
@@ -300,41 +244,7 @@ This is one of the structures used in the analysis of *T*.
 
 > Example: for *TT*<sub>1</sub>, we have *TT*<sub>1</sub>.*β* = (2, 10, -6, 2).
 
-**LEAN 4 code**
-```
--- Define the structure for the 4-tuple β
-structure Beta where
-  A : ℤ
-  B : ℤ
-  L : ℤ
-  E : ℤ
-
--- Create a 4-tuple β from the vertices of a sub-array TTi
-def create_beta (TTi : List (List ℤ)) : Beta :=
-  ⟨TTi.head!.head!, TTi.head!.getLast!, TTi.getLast!.head!, TTi.getLast!.getLast!⟩
-
---- -- Provide a Repr instance for Beta to define how it should be displayed
---- instance : Repr Beta :=
----  ⟨fun β => s!"⟨{β.A}, {β.B}, {β.L}, {β.E}⟩"⟩
-
--- Example usage: Create β for TT1
-def β1 : Beta := create_beta TT1
-
---- #eval β1 -- Visualize β1
-
-#eval β1.A -- Visualize β1
-#eval β1.B -- Visualize β1
-#eval β1.L -- Visualize β1
-#eval β1.E -- Visualize β1
-```
-
-**LEAN 4 code annotation**
-
   -----------------------------------------------------------------------
-
-  -----------------------------------------------------------------------
-
-**Item name**
 
 Lemma 4.1. This is the first Lemma.
 
@@ -348,26 +258,7 @@ This is one of the results used in the subsequent proofs.
 
 The proof is derived from the construction of *T*.
 
-**LEAN 4 code**
-```
-lemma lemma_4_1 (m n c k : ℤ) :
-  let TTi_A := m + n
-  let TTi_B := m + (n + k)
-  let TTi_L := (m + c) + n
-  let TTi_E := (m + c) + (n + k)
-  TTi_B + TTi_L = TTi_A + TTi_E :=
-by
-  -- Expand and simplify the expressions
-  linarith
-```
-
-**LEAN 4 code annotation**
-
   -----------------------------------------------------------------------
-
-  -----------------------------------------------------------------------
-
-**Item name**
 
 Lemma 4.2. This is the second Lemma.
 
@@ -381,19 +272,7 @@ Lemma 4.2. This is the second Lemma.
 
 This result is used in the subsequent proofs.
 
-**LEAN 4 code**
-
   -----------------------------------------------------------------------
-
-  -----------------------------------------------------------------------
-
-**LEAN 4 code annotation**
-
-  -----------------------------------------------------------------------
-
-  -----------------------------------------------------------------------
-
-**Item name**
 
 Lemma 4.3. this is the third Lemma.
 
@@ -475,19 +354,7 @@ which implies that *TT*<sub>i</sub>.*B* + *TT*<sub>i</sub>.*L* = *TT*<sub>i</sub
 ((6*x +* 6*y* + -4) + (6*x +* 6*y +* -4)) or ((6*x +* 6*y +* -2) + (6*x
 +* 6*y +* -2)) depending on which form *p*<sub>α</sub> can be expressed.
 
-**LEAN 4 code**
-
   -----------------------------------------------------------------------
-
-  -----------------------------------------------------------------------
-
-**LEAN 4 code annotation**
-
-  -----------------------------------------------------------------------
-
-  -----------------------------------------------------------------------
-
-**Item name**
 
 Lemma 4.4. This is the fourth Lemma.
 
@@ -524,19 +391,7 @@ The key in the proof is to show that for any prime *p*<sub>α</sub> ≥ 5,
     and each change represents a different sub-array or *Prime Array*
     *TT*<sub>i</sub>.
 
-**LEAN 4 code**
-
   -----------------------------------------------------------------------
-
-  -----------------------------------------------------------------------
-
-**LEAN 4 code annotation**
-
-  -----------------------------------------------------------------------
-
-  -----------------------------------------------------------------------
-
-**Item name**
 
 Lemma 4.5. This is the fifth Lemma.
 
@@ -559,19 +414,18 @@ on the first row of *T* are prime
 We can then algebraically show that (*TT*<sub>i</sub>.*B* + 3) and
 ((*TT*<sub>i</sub>.*B* + 3) − *TT*<sub>i</sub>.*E*) are prime.
 
-**LEAN 4 code**
+**Constructive Proof** 
+
+We can prove this result by construction by following these steps:
+
+1. (*TT*<sub>i</sub>.*B* + 3) is prime always, by construction.
+2. (*TT*<sub>i</sub>.*E*) is the difference between two primes P and Q, again by construction.
+3. But (*TT*<sub>i</sub>.*B* + 3) and (*TT*<sub>i</sub>.*E*) are on the same column. This means we can set P = (*TT*<sub>i</sub>.*B* + 3), which 
+further implies that P - E = Q or (*TT*<sub>i</sub>.*B* + 3) - (*TT*<sub>i</sub>.*E*) = Q.
+4. Now since Q is prime then (*TT*<sub>i</sub>.*B* + 3) - (*TT*<sub>i</sub>.*E*) is also prime.
+
 
   -----------------------------------------------------------------------
-
-  -----------------------------------------------------------------------
-
-**LEAN 4 code annotation**
-
-  -----------------------------------------------------------------------
-
-  -----------------------------------------------------------------------
-
-**Item name**
 
 Theorem 1. The first Theorem, the first of the two main results.
 
@@ -620,19 +474,7 @@ can be is re-stated using the following equivalent assignments:
 >
 > *p*<sub>n+m</sub> − *p*<sub>n</sub> = *TT*<sub>i</sub>.*E.*
 
-**LEAN 4 code**
-
   -----------------------------------------------------------------------
-
-  -----------------------------------------------------------------------
-
-**LEAN 4 code annotation**
-
-  -----------------------------------------------------------------------
-
-  -----------------------------------------------------------------------
-
-**Item name**
 
 Theorem 2. This is the second Theorem, the second of the two main
 results.
@@ -646,16 +488,6 @@ results.
 This result is just a special case of Theorem 1 when *p*<sub>α</sub> is set to 5.
 I am sure this would be resolved by LEAN 4 using the \"refl\" similar
 tactic.
-
-**LEAN 4 code**
-
-  -----------------------------------------------------------------------
-
-  -----------------------------------------------------------------------
-
-**LEAN 4 code annotation**
-
-  -----------------------------------------------------------------------
 
   -----------------------------------------------------------------------
 
