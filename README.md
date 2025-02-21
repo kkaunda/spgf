@@ -138,6 +138,7 @@ assistants like LEAN in academia, research and industry in general.
 **Useful Links**
 
 * [Zulip chat for Lean](https://leanprover.zulipchat.com/) for coordination
+* [Discussion of the formalization project](https://leanprover.zulipchat.com/#narrow/channel/113488-general/topic/discussion.3A.20Structure.20in.20Prime.20Gaps.20-.20Formalized.20.28SPGF.29)
 * [Blueprint](https://kkaunda.github.io/spgf/blueprint/)
 * [Blueprint as pdf](https://kkaunda.github.io/spgf/blueprint.pdf)
 * [Dependency graph](https://kkaunda.github.io/spgf/blueprint/dep_graph_document.html)
