@@ -1,121 +1,140 @@
 import Mathlib
-import Mathlib.Data.Nat.Prime.Basic
-import Mathlib.Data.List.Basic
-import Mathlib.Tactic.Linarith
-import Mathlib.Data.Int.Defs
-import Mathlib.Tactic.Basic
-import Mathlib.Data.Finset.Basic
-import Mathlib.Tactic.ModCases
-import Mathlib.Data.Set.Basic
-import Mathlib.Tactic.NormNum
-import Mathlib.Algebra.ModEq
 
-open List Nat
+set_option linter.unusedVariables false
 
--- Define a finite portion of a Cayley table.
-def cayley_table (n : ℕ) : List (List ℤ) :=
-  let primes := (List.range n).filter Nat.Prime |>.map (λ p => ↑p)
-  let inverses := primes.map (λ p => -p)
-  let first_row := 0 :: primes
-  let table := inverses.map (λ inv => inv :: (primes.map (λ p => p + inv)))
-  first_row :: table
+def primes_set := { n | Nat.Prime n }
+instance : Infinite primes_set := Nat.infinite_setOf_prime.to_subtype
+instance : DecidablePred (fun n => n ∈ primes_set) := fun n => Nat.decidablePrime n
 
--- Function to create a valid sub-array from a Cayley table.
-def sub_array (n start_c end_c end_r : ℕ) : Option (List (List ℤ)) :=
-  let table := cayley_table n
-  let fixed_r := 2
-  if start_c < 3 ∨ end_c < start_c ∨ end_r < fixed_r + 2 ∨ end_r > table.length ∨ end_c > (table.head?.getD []).length then
-    none
-  else
-    some ((table.drop fixed_r).take (end_r - fixed_r + 1)
-      |>.map (λ row => (row.drop start_c).take (end_c - start_c + 1)))
+def primes (n : ℕ) : ℕ := if (n = 0) then 0 else Nat.Subtype.ofNat primes_set (n - 1)
 
--- Define Beta structure.
+lemma primes_zero : primes 0 = 0 := rfl
+
+def primes_inv_exists (n : ℕ) (n_prime : Nat.Prime n) : ∃ i, primes i = n :=
+by
+  have := Nat.Subtype.ofNat_surjective (s := primes_set)
+  obtain ⟨a, ha⟩ := this ⟨n, n_prime⟩
+  use a + 1
+  simp [primes, ha]
+
+def primes_inv (n : ℕ) (n_prime : Nat.Prime n) : ℕ := Nat.find (primes_inv_exists n n_prime)
+def primes_inv_def (n : ℕ) (n_prime : Nat.Prime n) : primes (primes_inv n n_prime) = n :=
+Nat.find_spec (primes_inv_exists n n_prime)
+
+lemma primes_inv_pos (n : ℕ) (n_prime : Nat.Prime n) : 0 < primes_inv n n_prime :=
+by
+  rw [zero_lt_iff]
+  intro h
+  replace h := congrArg primes h
+  rw [primes_inv_def, primes_zero] at h
+  exact n_prime.ne_zero h
+
+lemma primes_prime {n : ℕ} (hn : n > 0) : Nat.Prime (primes n) :=
+by
+  unfold primes
+  rw [if_neg hn.ne']
+  exact Subtype.mem _
+
+def cayley_table (row col : ℕ) : ℤ := primes col - primes row
+
+-- -------------------------------------------------------
+
+structure Ds where
+  y      : ℕ
+  y_pos  : y > 0
+  width  : ℕ
+  height : ℕ
+
 structure Beta where
-  A : ℤ
-  B : ℤ
-  L : ℤ
-  E : ℤ
-  isValid : A < B ∧ A > L ∧ B > L ∧ B > E ∧ L < E ∧ A = E
-  deriving Repr
+  d          : Ds
+  P          : ℕ
+  three_lt_P : 3 < P := by decide
+  prime_P    : Nat.Prime P := by decide
 
-def beta_from_sub_array (sub : Option (List (List ℤ))) : Option Beta :=
-  match sub with
-  | none => none
-  | some subArray =>
-    let A := subArray.head?.bind (λ row => row.head?)
-    let B := subArray.head?.bind (λ row => row.getLast?)
-    let L := subArray.getLast?.bind (λ row => row.head?)
-    let E := subArray.getLast?.bind (λ row => row.getLast?)
-    match (A, B, L, E) with
-    | (some a, some b, some l, some e) =>
-      if h : a < b ∧ a > l ∧ b > l ∧ b > e ∧ l < e ∧ a = e then
-        some { A := a, B := b, L := l, E := e, isValid := h }
-      else none
-    | _ => none
+-- -------------------------------------------------------
+lemma primes_two_eq_three : primes 2 = 3 := by native_decide
 
--- lemma 4.1
--- an important result especially for a combinatorial proof
-lemma beta_field_sum_from_cayley (β : Beta) (m n c k : ℤ)
-  (hA : β.A = m + n)
-  (hB : β.B = m + (n + k))
-  (hL : β.L = (m + c) + n)
-  (hE : β.E = (m + c) + (n + k)) :
-  β.B + β.L = β.A + β.E := by
-  -- Substitute the relationships for β.A, β.B, β.L, and β.E.
-  rw [hA, hB, hL, hE]
-  -- Simplify the resulting equation.
-  linarith
 
--- lemma 4.2
--- Theorem to prove that all primes > 3 can be expressed
--- in the form 6n ± 1.
-theorem prime_form_6n_plus_1_or_6n_minus_1 (p : ℕ) (hprime : Nat.Prime p) (hp : 3 < p) :
-    ∃ n, (p = 6 * n + 1 ∨ p = 6 * n - 1) := by
-  suffices p % 6 = 1 ∨ p % 6 = 5 by
-    obtain hp | hp := this
-    · use p / 6
-      left
-      omega
-    · use (p / 6 + 1)
-      right
-      omega
-  have : p % 6 < 6 := Nat.mod_lt _ (by norm_num)
-  have : p ≠ 2 := by linarith
-  have : p ≠ 3 := by linarith
-  have : p ≠ 6 := by rintro rfl; norm_num at hprime
-  interval_cases hr : p % 6 <;> first | omega | (exfalso; revert hr)
-  · rw [← Nat.dvd_iff_mod_eq_zero, Nat.dvd_prime hprime]
-    aesop
-  · refine ne_of_apply_ne (· % 2) ?_
-    dsimp
-    rw [Nat.mod_mod_of_dvd _ (by norm_num), ← Nat.dvd_iff_mod_eq_zero, Nat.dvd_prime hprime]
-    aesop
-  · refine ne_of_apply_ne (· % 3) ?_
-    dsimp
-    rw [Nat.mod_mod_of_dvd _ (by norm_num), ← Nat.dvd_iff_mod_eq_zero, Nat.dvd_prime hprime]
-    aesop
-  · refine ne_of_apply_ne (· % 2) ?_
-    dsimp
-    rw [Nat.mod_mod_of_dvd _ (by norm_num), ← Nat.dvd_iff_mod_eq_zero, Nat.dvd_prime hprime]
-    aesop
+def Beta.primeIndex (β : Beta) := primes_inv β.P β.prime_P
 
--- Lemma 4.3, 4.4, and 4.5.
-theorem infinitely_many_betas_with_prime_properties (p : ℕ) (hprime : Nat.Prime p) (hmin : 3 < p) :
-  Set.Infinite {β : Beta |
-    ∃ x y : ℤ,
-      x < x + y ∧
-      y > 0 ∧
-      (
-        (↑p = 6 * (x + y) - 1 ∧
-          β.A = 6 * x + 6 * y - 4 ∧ β.B = 6 * x + 12 * y - 8 ∧ β.L = 6 * x ∧ β.E = 6 * x + 6 * y - 4 ∧
-          Nat.Prime (β.B + 3).toNat ∧ Nat.Prime ((β.B + 3) - β.E).toNat
-        ) ∨
-        (↑p = 6 * (x + y) + 1 ∧
-          β.A = 6 * x + 6 * y - 2 ∧ β.B = 6 * x + 12 * y - 4 ∧ β.L = 6 * x ∧ β.E = 6 * x + 6 * y - 2 ∧
-          Nat.Prime (β.B + 3).toNat ∧ Nat.Prime ((β.B + 3) - β.E).toNat
-        )
-      )
-  } :=
-by sorry
+def Beta.A (β : Beta) := cayley_table 2 β.primeIndex
+def Beta.B (β : Beta) := cayley_table 2 (β.primeIndex + β.d.width)
+def Beta.L (β : Beta) := cayley_table (2 + β.d.height) (β.primeIndex)
+def Beta.E (β : Beta) := cayley_table (2 + β.d.height) (β.primeIndex + β.d.width)
 
+lemma Beta.primeIndexPos (β : Beta) : 0 < β.primeIndex := primes_inv_pos _ _
+
+lemma Beta.B_def (β : Beta) : β.B = cayley_table 2 (β.primeIndex + β.d.width) := rfl
+lemma Beta.E_def (β : Beta) : β.E = cayley_table (2 + β.d.height) (β.primeIndex + β.d.width) := rfl
+
+lemma third_row_lemma {col} (hn : 0 < col) : Nat.Prime (cayley_table 2 col + 3).natAbs :=
+by
+  unfold cayley_table
+  simp [primes_two_eq_three, primes_prime hn]
+
+lemma A_plus_three_is_prime (β : Beta) : Nat.Prime (β.A + 3).natAbs := third_row_lemma β.primeIndexPos
+lemma B_plus_three_is_prime (β : Beta) : Nat.Prime (β.B + 3).natAbs := third_row_lemma (β.primeIndexPos.trans_le (Nat.le_add_right _ _))
+lemma B_plus_three_minus_E (β : Beta) : Nat.Prime (β.B + 3 - β.E).natAbs :=
+by
+  rw [Beta.B_def, Beta.E_def]
+  unfold cayley_table
+  rw [primes_two_eq_three]
+  simp
+  exact primes_prime (zero_lt_two.trans_le (Nat.le_add_right _ _))
+
+-- ------------------------------------------------------
+
+-- A + E = B + L
+lemma able_relationships (β : Beta) : β.A + β.E = β.B + β.L :=
+by
+  unfold Beta.A Beta.B Beta.L Beta.E cayley_table
+  ring
+-- ------------------------------------------------------
+
+lemma B_plus_three_minus_prime_equals_E (β : Beta) (_h : Nat.Prime (β.B + 3 - β.E).natAbs) :
+  (β.B + 3) - (β.B + 3 - β.E) = β.E :=
+by ring
+
+-- -------------------------------------------------------
+/-- For a fixed prime P₀ (with 3 < P₀ and P₀ prime), build a Beta from a given Ds by setting P = P₀. -/
+noncomputable def beta_fixed (P₀ : ℕ) (hP₀ : 3 < P₀) (hp₀ : Nat.Prime P₀) (d : Ds) : Beta :=
+{ d          := d,
+  P          := P₀,
+  three_lt_P := hP₀,
+  prime_P    := hp₀ }
+
+/-- beta_fixed is injective since if beta_fixed P₀ hP₀ hp₀ d₁ = beta_fixed P₀ hP₀ hp₀ d₂ then d₁ = d₂. -/
+theorem beta_fixed_injective (P₀ : ℕ) (hP₀ : 3 < P₀) (hp₀ : Nat.Prime P₀) :
+  Function.Injective (beta_fixed P₀ hP₀ hp₀) :=
+fun d₁ d₂ h => congr_arg Beta.d h
+
+/-- Define an injection from Ds into the subtype { b : Beta // b.P = P₀ } by mapping d to ⟨beta_fixed P₀ hP₀ hp₀ d, rfl⟩. -/
+noncomputable def beta_sub_inj (P₀ : ℕ) (hP₀ : 3 < P₀) (hp₀ : Nat.Prime P₀)
+  (d : Ds) : { b : Beta // b.P = P₀ } :=
+⟨ beta_fixed P₀ hP₀ hp₀ d, rfl ⟩
+
+/-- Prove that beta_sub_inj is injective. -/
+theorem beta_sub_inj_injective (P₀ : ℕ) (hP₀ : 3 < P₀) (hp₀ : Nat.Prime P₀) :
+  Function.Injective (beta_sub_inj P₀ hP₀ hp₀) :=
+fun d₁ d₂ h =>
+  beta_fixed_injective P₀ hP₀ hp₀ (Subtype.ext_iff.mp h)
+
+/-- An injection from ℕ into Ds is given by mapping n to the Ds instance with y := n + 1, width := n + 1, height := n + 1. -/
+noncomputable def ds_inj (n : ℕ) : Ds :=
+{ y      := n + 1,
+  y_pos  := Nat.succ_pos n,
+  width  := n + 1,
+  height := n + 1 }
+
+theorem ds_inj_injective : Function.Injective ds_inj :=
+fun n m h => Nat.succ.inj (congrArg Ds.y h)
+
+instance : Infinite Ds :=
+  Infinite.of_injective ds_inj ds_inj_injective
+
+/-- Since Ds is infinite and beta_sub_inj is injective, the subtype { b : Beta // b.P = P₀ } is infinite. -/
+theorem Beta_fixed_infinite (P₀ : ℕ) (hP₀ : 3 < P₀) (hp₀ : Nat.Prime P₀) :
+  Infinite { b : Beta // b.P = P₀ } :=
+Infinite.of_injective (fun d : Ds => ⟨ beta_fixed P₀ hP₀ hp₀ d, rfl ⟩)
+  (beta_sub_inj_injective P₀ hP₀ hp₀)
+-- ------------------------------------------------------

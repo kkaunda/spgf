@@ -13,103 +13,43 @@ Let us lean together!
 
 ```
 import Mathlib
-import Mathlib.Data.Nat.Prime.Basic
-import Mathlib.Data.List.Basic
-import Mathlib.Tactic.Linarith
-import Mathlib.Data.Int.Defs
-import Mathlib.Tactic.Basic
-import Mathlib.Data.Finset.Basic
-import Mathlib.Tactic.ModCases
-import Mathlib.Data.Set.Basic
-import Mathlib.Tactic.NormNum
-import Mathlib.Algebra.ModEq
 
-open List Nat
+set_option linter.unusedVariables false
 
--- Define a finite portion of a Cayley table.
-def cayley_table (n : ℕ) : List (List ℤ) :=
-  let primes := (List.range n).filter Nat.Prime |>.map (λ p => ↑p)
-  let inverses := primes.map (λ p => -p)
-  let first_row := 0 :: primes
-  let table := inverses.map (λ inv => inv :: (primes.map (λ p => p + inv)))
-  first_row :: table
+def primes_set := { n | Nat.Prime n }
+instance : Infinite primes_set := Nat.infinite_setOf_prime.to_subtype
+instance : DecidablePred (fun n => n ∈ primes_set) := fun n => Nat.decidablePrime n
+
+def primes (n : ℕ) : ℕ := if (n = 0) then 0 else Nat.Subtype.ofNat primes_set (n - 1)
+
+lemma primes_zero : primes 0 = 0 := rfl
+
+def primes_inv_exists (n : ℕ) (n_prime : Nat.Prime n) : ∃ i, primes i = n :=
+by
+  have := Nat.Subtype.ofNat_surjective (s := primes_set)
+  obtain ⟨a, ha⟩ := this ⟨n, n_prime⟩
+  use a + 1
+  simp [primes, ha]
+
+def primes_inv (n : ℕ) (n_prime : Nat.Prime n) : ℕ := Nat.find (primes_inv_exists n n_prime)
+def primes_inv_def (n : ℕ) (n_prime : Nat.Prime n) : primes (primes_inv n n_prime) = n :=
+Nat.find_spec (primes_inv_exists n n_prime)
 ```
 
 # **Structure in Prime Gaps -- Formalized**
 
 ## **By Kajani Kaunda and others.**
 
-## **Abstract**
-
-In this open community project, we formalize using the LEAN programming
-language, the definitions and results presented in the paper [*Structure
-in Prime
-Gaps*](https://www.researchsquare.com/article/rs-4058806/latest).
-
-## **Introduction**
-
-**Remark:** *In this paper, we will dispense with a lot of contextual
-explanations and restrict ourselves only to those which are pertinent to
-the formalization process.*
-
-Formalization of Mathematics.
-
-The formalization of mathematics refers to the process of encoding
-mathematical definitions, theorems, and proofs in a formal language that
-can be processed and checked for correctness by a computer. This
-approach ensures that every logical step is explicitly verified, leaving
-no room for ambiguity or human error. This meticulous approach ensures
-that every logical step is explicitly defined and verified, minimizing
-the risk of human error in mathematical proofs. The goal is to achieve a
-level of rigor and precision that surpasses traditional mathematical
-methods, enabling the verification of complex proofs and the discovery
-of new mathematical insights. Formalization not only helps in validating
-existing results but also provides a robust framework for discovering
-new ones.
-
-Proof Assistants.
-
-Proof assistants are software tools designed to aid in the creation and
-verification of formal proofs. These tools provide a platform for
-writing proofs in a formal language and automatically verifying their
-correctness. They offer a rigorous environment where users can construct
-proofs interactively or automatically, depending on the complexity of
-the problem. These tools are essential in modern mathematics and
-computer science, allowing for the development of highly reliable
-software and the verification of intricate mathematical theorems.
-Popular proof assistants include Coq, Isabelle, and Lean. There are many
-others. They are used not only in pure mathematics but also in fields
-like computer science, where formal verification of software and
-hardware is crucial. They have been instrumental in formalizing
-significant results across various domains.
-
-LEAN.
-
-LEAN is a modern open-source proof assistant developed at Microsoft
-Research. It stands out for its user-friendly interface and powerful
-capabilities in both theorem proving and automated reasoning. It is
-designed to support the formalization of mathematics and the
-verification of software. LEAN supports a rich type theory known as
-dependent type theory, which allows for expressive and concise
-representations of mathematical objects and proofs. Its growing
-ecosystem includes a standard library of formalized mathematics and
-tools like the LEAN community web editor. LEAN has been adopted by many
-mathematicians and computer scientists for both educational purposes and
-advanced research projects. LEAN combines powerful automation with
-interactive proof development, making it accessible to both beginners
-and experts. LEAN 4, the latest version, offers significant improvements
-in performance and usability, encouraging more widespread adoption
-within the mathematical community.
-
 Structure in Prime Gaps.
 
 In this project, we aim to formalize the results presented in the article
-*Structure in Prime Gaps* using LEAN 4, the latest version of the LEAN
-proof assistant. By leveraging the capabilities of LEAN 4, we seek to
-ensure the correctness and robustness of these findings relating to the
-existence of infinitely many *structured* gaps between prime numbers.
-This formalization will provide a rigorous foundation for the results
-and contribute to the broader effort of formalizing mathematics.
+[*Structure in Prime Gaps*](https://www.researchsquare.com/article/rs-4058806/latest)
+using LEAN 4, the latest version of the LEAN proof assistant. By leveraging 
+the capabilities of LEAN 4, we seek to ensure the correctness and 
+robustness of these findings relating to the existence of infinitely many 
+*structured* gaps between prime numbers. This formalization will provide 
+a rigorous foundation for the results and contribute to the broader 
+effort of formalizing mathematics.
 
 The paper [*Structure in Prime
 Gaps*](https://www.researchsquare.com/article/rs-4058806/latest)
@@ -166,9 +106,7 @@ from which **Theorem 2** is implied as seen in Table 3.
     the patterns observed in Table 2.
 
 -   **Remark:** We note that the Cayley Table *T* is a partial
-    representation of an otherwise infinite structure. Therefore no
-    generalization of these results to some "complete/larger" set is
-    required.
+    representation of an otherwise infinite structure. 
 
 **Table 1**
 
@@ -187,317 +125,13 @@ from which **Theorem 2** is implied as seen in Table 3.
 
 ![](vertopal_bfea56392a264e1da44fa95b98b2549d/media/image6.jpeg)
 
-
-## **Definitions and results to be Formalized**
-
-The final LEAN 4 code will most likely be different from the following code snippets but at the very least it is good to know and verify that formalization is possible with the current technology stack; LEAN 4 and the Mathlib library.
-
-We begin as follows:
-
-Definition 1.
-
-**Formal statement**
-
-**Definition 1**: Define a model of prime gaps as a Cayley Table *T*
-constructed from a *Cummutative Partial Groupoid* (*J*, +) based on a
-subset *J* of *Z* containing the infinite set of prime numbers and their
-additive inverses, such that the elements of the first row of *T* are
-the primes and the elements of the first column of *T* are their
-additive inverses.
-
-**Notes**
-
-The set *J* is defined as follows *J* = (\...,−*p*<sub>n+2</sub>, −*p*<sub>n+1</sub>,
-−*p*<sub>n</sub>, *p*<sub>n</sub>, p<sub>n+1</sub>, *p*<sub>n+2</sub>, \...). Notice that since primes are
-infinite then by definition the structure T is also infinite. The structures used by LEAN 4 in defining *T* must reflect
-this property.
-
-
-
-  -----------------------------------------------------------------------
-
-Definition 2.
-
-**Formal statement**
-
-> **Definition 2**: Define a *v* x *w* sub-array *TT*<sub>i</sub> of *T* such that *v, w* ≥ 2.
-
-**Notes**
-
-Definition 2 defines a sub-array which is later used to algebraically
-construct a pattern.
-
-> Example: *TT*<sub>1</sub> = ((2, 4, 8, 10), (0, 2, 6, 8), (-2, 0, 4, 6), (-6, -4, 0, 2)).
-
-  -----------------------------------------------------------------------
-
-Definition 3.
-
-**Formal statement**
-
-> **Definition 3**: Define a 4-tuple *β* = (*A, B, L, E*) such that the
-> values of its elements are the vertices of *TT*<sub>i</sub>.
-
-**Notes**
-
-This is one of the structures used in the analysis of *T*.
-
-> Example: for *TT*<sub>1</sub>, we have *TT*<sub>1</sub>.*β* = (2, 10, -6, 2).
-
-  -----------------------------------------------------------------------
-
-Lemma 4.1. This is the first Lemma.
-
-**Formal statement**
-
-> **Lemma 4.1** : Prove that: Given a 4-tuple *β* then *A* + *E* = *B* + *L*.
-
-**Notes**
-
-This is one of the results used in the subsequent proofs.
-
-The proof is derived from the construction of *T*.
-
-  -----------------------------------------------------------------------
-
-Lemma 4.2. This is the second Lemma.
-
-**Formal statement**
-
-> **Lema 4.2** : Prove that: All prime numbers greater than 3 can be expressed in the form 6*n* + 1 or 6*n* − 1.
->
-> (A known result).
-
-**Notes**
-
-This result is used in the subsequent proofs.
-
-  -----------------------------------------------------------------------
-
-Lemma 4.3. this is the third Lemma.
-
-**Formal statement**
-
-> **Lemma 4.3**: Let *t*<sub>m,n</sub> be a term in *T* where the indexes *m* and *n* are zero based and refer to the
-> rows and columns in *T* respectively.
-
-> Prove that:
->
-> For every prime *p*<sub>α</sub> ≥ 5, there exists a sub-array *TT*<sub>i</sub> ∈ *T*
-> such that the following properties are simultaneously true;
->
-> Property 1 : *TT*<sub>i</sub>.*A* + 3 ∈ {6*n* ± 1\|*n* ∈ *N*<sub>1</sub>}
->
-> Property 2 : (*TT*<sub>i</sub>.*B* + 3) − *TT*<sub>i</sub>.*E* ∈ {6*n* ± 1\|*n* ∈
-> *N*<sub>1</sub>}
->
-> Property 3 : *TT*<sub>i</sub>.*L* ≡ 0 (mod 6)
->
-> Property 4 : *TT*<sub>i</sub>.*A* = *TT*<sub>i</sub>.*E*
->
-> Property 5 : *TT*<sub>i</sub>.*B* + 3 ∈ {6*n* ± 1\|*n* ∈ *N*<sub>1</sub>}
->
-> If and only if
->
-> for *TT*<sub>i</sub>.*A* + 3 ∈ {6*n* − 1\|*n* ∈ *N*<sub>1</sub>};
->
-> *TT*<sub>i</sub>.*A* = 6*x* + 6*y* − 4
->
-> *TT*<sub>i</sub>.*B* = 6*x* + 12*y* − 8
->
-> *TT*<sub>i</sub>.*L* = 6*x*
->
-> *TT*<sub>i</sub>.*E* = 6*x* + 6*y* − 4
->
-> for *TT*<sub>i</sub>.*A* + 3 ∈ {6*n* + 1\|*n* ∈ *N*<sub>1</sub>};
->
-> *TT*<sub>i</sub>.*A* = 6*x* + 6*y* − 2
->
-> *TT*<sub>i</sub>.*B* = 6*x* + 12*y* − 4
->
-> *TT*<sub>i</sub>.*L* = 6*x*
->
-> *TT*<sub>i</sub>.*E* = 6*x* + 6*y* − 2
->
-> where *n* ∈ *N*<sub>1</sub>, *x* \< *n*, *y* \> 0, *n* = *x* + *y*,
-> (*TT*<sub>i</sub>.*A* + 3) = *p*<sub>α</sub> and *TT*<sub>i</sub>.*A* = *t*<sub>2,k</sub>.
-
-**Notes**
-
-This result demonstrates the existence of a pattern. It algebraically
-shows that for every prime *p*<sub>α</sub> ≥ 5, there is a pattern *TT*<sub>i</sub> that
-defines a pair of integers *Q*<sub>i</sub> and *R*<sub>i</sub> such that *R*<sub>i</sub> − *Q*<sub>i</sub> =
-*p*<sub>α</sub> − 3.
-
-The key in the proof of this result is the following analysis:
-
--   We are given *p*<sub>α</sub> as a constant quantity.
-
--   Now *p*<sub>α</sub> can be expressed in the form 6*n* ± 1.
-
--   This implies that *n* in the expression 6*n* ± 1 is constant.
-
--   We then let *n* = *x* + *y*.
-
--   We then use combinatory analysis to heuristically determine which
-    expressions to assign to *A*, *B*, *L* and *E* from the sets *M* =
-    (6*x*, 6*y*, -4, 6*x*, 6*y*, -4) and *N* = (6*x*, 6*y*, -2, 6*x*,
-    6*y*, -2) such that the five (5) properties of Lemma 4.3 are
-    satisfied.
-
-But how are the sets *M* and *N* derived?
-
-Notice that by Lemma 4.3, *TT*<sub>i</sub>.*A* = *TT*<sub>i</sub>.*E* and (*TT*<sub>i</sub>.*A* +
-3) = *p*<sub>α</sub>. Since *p*<sub>α</sub> is prime then it can be expressed in the forms
-6*n* ± 1 or 6(*x* + *y*) ± 1. And by Lemma 4.1, *A* + E = *B* + *L*,
-which implies that *TT*<sub>i</sub>.*B* + *TT*<sub>i</sub>.*L* = *TT*<sub>i</sub>.*A* + *TT*<sub>i</sub>.E =
-((6*x +* 6*y* + -4) + (6*x +* 6*y +* -4)) or ((6*x +* 6*y +* -2) + (6*x
-+* 6*y +* -2)) depending on which form *p*<sub>α</sub> can be expressed.
-
-  -----------------------------------------------------------------------
-
-Lemma 4.4. This is the fourth Lemma.
-
-**Formal statement**
-
-> **Lemma 4.4**: Let any sub-array *TT*<sub>i</sub> that satisfies Lemma 4.3 be referred to as a *Prime Array*.
-
-> Prove that: For every prime *p*<sub>α</sub> ≥ 5, there are infinitely many
-> *Prime Arrays* such that *TT<sub>i</sub>.A = p*<sub>α</sub> *− 3.*
-
-**Notes**
-
-This will show that for any prime *p*<sub>α</sub> ≥ 5 the pattern defined by the
-*Prime Array TT*<sub>i</sub> occurs infinitely often and that consequently, the
-integer pairs (*Q*<sub>i</sub>, *R*<sub>i</sub>) also occur infinitely often.
-
-The key in the proof is to show that for any prime *p*<sub>α</sub> ≥ 5,
-
--   *p*<sub>α</sub> is constant.
-
--   Which implies *n* is constant.
-
--   But *n* = *x* + *y*
-
--   Now changing the value of *y* changes the value of *x in order* to
-    maintain the equality *n* = *x* + *y*.
-
--   Changing the value of *x* changes the value of *L* since *L* = 6*x*.
-
--   Changing the value of *L* changes the value of *B* since *B* + *L* =
-    *A* + *E* and *A* + *E* is a constant expression.
-
--   This implies that the value of *y* can be changed infinitely often
-    and each change represents a different sub-array or *Prime Array*
-    *TT*<sub>i</sub>.
-
-  -----------------------------------------------------------------------
-
-Lemma 4.5. This is the fifth Lemma.
-
-**Formal statement**
-
-> **Lemma 4.5**: Prove that: For every prime *p*<sub>α</sub> ≥ 5, there exists infinitely many *Prime Arrays*,
-> *TT*<sub>i</sub>, such that *TT*<sub>i</sub>.*A* = *p*<sub>α</sub> − 3 and (*T*<sub>i</sub>.*B* + 3) and ((*T*<sub>i</sub>.
-> *B* + 3) −*T*<sub>i</sub>.*E*) are prime.
-
-**Notes**
-
-This will show that for any prime *p*<sub>α</sub> ≥ 5, the *Prime Arrays* *TT*<sub>i</sub>
-occur infinitely often and *Q*<sub>i</sub> and *R*<sub>i</sub> are prime. Notice that
-here, (*TT*<sub>i</sub>.*B* + 3) = *R*<sub>i</sub> and *Q*<sub>i</sub> = ((*TT*<sub>i</sub>.*B* + 3) −
-*TT*<sub>i</sub>.*E*).
-
-The proof here relies on the construction of *T* where all the elements
-on the first row of *T* are prime
-
-We can then algebraically show that (*TT*<sub>i</sub>.*B* + 3) and
-((*TT*<sub>i</sub>.*B* + 3) − *TT*<sub>i</sub>.*E*) are prime.
-
-**Constructive Proof** 
-
-We can prove this result by construction by following these steps:
-
-1. (*TT*<sub>i</sub>.*B* + 3) is prime always, by construction.
-2. (*TT*<sub>i</sub>.*E*) is the difference between two primes P and Q, again by construction.
-3. But (*TT*<sub>i</sub>.*B* + 3) and (*TT*<sub>i</sub>.*E*) are on the same column. This means we can set P = (*TT*<sub>i</sub>.*B* + 3), which 
-further implies that P - E = Q or (*TT*<sub>i</sub>.*B* + 3) - (*TT*<sub>i</sub>.*E*) = Q.
-4. Now since Q is prime then (*TT*<sub>i</sub>.*B* + 3) - (*TT*<sub>i</sub>.*E*) is also prime.
-
-
-  -----------------------------------------------------------------------
-
-Theorem 1. The first Theorem, the first of the two main results.
-
-**Formal statement**
-
-**Theorem 1**: Prove that: For every prime *p*<sub>α</sub>, there exists
-infinitely many pairs of primes, (*p*<sub>n</sub>, *p*<sub>n+m</sub>), such that (*p*<sub>n+m</sub>
-− *p*<sub>n</sub>) = *p*<sub>α</sub> − 3, where n, α ≥ 3, m ≥ 1, and *p*<sub>n</sub> is the n<sup>th</sup>
-prime.
-
-**Notes**
-
-The claim is that this result is implied from the previous results as
-demonstrated in the following steps:
-
-**Step 1**: By Lemma 4.5, and the construction of *T*, *TT*<sub>i</sub>.*A* and
-*TT*<sub>i</sub>.*E* are prime gaps.
-
-**Step 2**: By Lemma 4.3, *TT*<sub>i</sub>.*A* = *TT*<sub>i</sub>*.E*.
-
-This is equivalent to: (*TT*<sub>i</sub>.*A* + 3) − 3 = ((*TT*<sub>i</sub>.*B* + 3) −
-((*TT*<sub>i</sub>.*B* + 3) − *TT*<sub>i</sub>.*E*)).
-
-**Step 3**: By Lemma 4.5, the following are prime; (*TT*<sub>i</sub>.*A* + 3),
-((*TT*<sub>i</sub>.*B* + 3) − *TT*<sub>i</sub>.*E*), (*TT*<sub>i</sub>.*B* + 3).
-
-**Step 4**: By Lemma 4.5, for every prime (*TT*<sub>i</sub>.*A* + 3) ≥ 5, there
-are infinitely many of the following pairs of primes defined as:
-(((*TT*<sub>i</sub>.*B* + 3) − *TT*<sub>i</sub>.*E*), (*TT*<sub>i</sub>.*B* + 3)).
-
-We can then see that the following statement is implied:
-
-> For every prime (*TT*<sub>i</sub>.*A* + 3) ≥ 5, there exists infinitely many
-> pairs of primes, (((*TT*<sub>i</sub>.*B* + 3) − *TT*<sub>i</sub>.*E*), (*TT*<sub>i</sub>.*B* +
-> 3)), such that ((*TT*<sub>i</sub>.*B* + 3) − ((*TT*<sub>i</sub>.*B* + 3) − *TT*<sub>i</sub>.*E*))
-> = (*TT*<sub>i</sub>.*A* + 3) − 3.
-
-This statement is equivalent to the formal statement of Theorem 1 which
-can be is re-stated using the following equivalent assignments:
-
-> *p*<sub>α</sub> − 3 = *TT*<sub>i</sub>.*A*.
->
-> *p*<sub>n+m</sub> − 3 = *TT*<sub>i</sub>.*B.*
->
-> *p*<sub>α</sub> − *p*<sub>n</sub> = *TT*<sub>i</sub>.*L*.
->
-> *p*<sub>n+m</sub> − *p*<sub>n</sub> = *TT*<sub>i</sub>.*E.*
-
-  -----------------------------------------------------------------------
-
-Theorem 2. This is the second Theorem, the second of the two main
-results.
-
-**Formal statement**
-
-> **Theorem 2**: Prove that there exist infinitely many pairs of primes with a gap of 2.
-
-**Notes**
-
-This result is just a special case of Theorem 1 when *p*<sub>α</sub> is set to 5.
-I am sure this would be resolved by LEAN 4 using the \"refl\" similar
-tactic.
-
   -----------------------------------------------------------------------
 
 **Outcome and Conclusion**
 
-By formalizing the results presented in the paper [*Structure in Prime
-Gaps*](https://www.researchsquare.com/article/rs-4058806/latest), we
-hope to contribute to the body of knowledge in mathematics as well as
-help establish the use of proof assistants like LEAN in academia,
-research and industry in general.
+By formalizing these results, we hope to contribute to the body of 
+knowledge in mathematics as well as help establish the use of proof 
+assistants like LEAN in academia, research and industry in general.
 
 **Source References**
 
