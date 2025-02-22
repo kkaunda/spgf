@@ -12,7 +12,7 @@ Let us lean together!
 ![](vertopal_bfea56392a264e1da44fa95b98b2549d/media/image2.jpeg)
 
 ```
-import Mathlib
+import Mathlib 
 
 set_option linter.unusedVariables false
 
