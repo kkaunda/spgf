@@ -7,7 +7,7 @@ usemathjax: true
 ---
 
 Let us lean together!
-![]({{ site.repository_url }}/vertopal_bfea56392a264e1da44fa95b98b2549d/media/image2.jpeg?raw=true)
+![](vertopal_bfea56392a264e1da44fa95b98b2549d/media/image2.jpeg?raw=true)
 
 ```
 import Mathlib 
