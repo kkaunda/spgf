@@ -125,7 +125,7 @@ from which **Theorem 2** is implied as seen in Table 3.
 
   -----------------------------------------------------------------------
 
-**Outcome and Conclusion**
+**Conclusion**
 
 By formalizing these results, we hope to contribute to the body of 
 knowledge in mathematics as well as help establish the use of proof 
