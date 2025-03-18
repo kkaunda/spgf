@@ -172,7 +172,7 @@ fun d₁ d₂ h => congr_arg Beta.d h
 
 -- ------------------------------------------------------
 /-- Define an injection from Ds into the subtype { b : Beta // b.P = P₀ } by mapping d to
-    ⟨beta_fixed' P₀ hP₀ hp₀ hk₀ hkpos₀ hkxy₀ A_val hA d, rfl⟩. -/
+    ⟨beta_fixed' P₀ ... d, rfl⟩. -/
 noncomputable def beta_sub_inj 
   (P₀ : ℕ) (hP₀ : 3 < P₀) (hp₀ : Nat.Prime P₀)
   (hk₀ : ℕ) (hkpos₀ : hk₀ > 0) (hkxy₀ : ∀ d : Ds, hk₀ = d.x + ↑d.y)
