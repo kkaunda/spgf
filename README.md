@@ -12,13 +12,20 @@ Let us lean together!
 ![](vertopal_bfea56392a264e1da44fa95b98b2549d/media/image2.jpeg)
 
 ```
-import Mathlib 
+import Mathlib
 
-set_option linter.unusedVariables false
+set_option linter.unusedTactic false 
+set_option linter.unusedVariables false 
+
+-- ------------------------------------------------------
+-- define the cayley table - infinitely defined
+-- ------------------------------------------------------
 
 def primes_set := { n | Nat.Prime n }
+
 instance : Infinite primes_set := Nat.infinite_setOf_prime.to_subtype
-instance : DecidablePred (fun n => n ∈ primes_set) := fun n => Nat.decidablePrime n
+instance : DecidablePred (fun n => n ∈ primes_set) := 
+fun n => Nat.decidablePrime n
 
 def primes (n : ℕ) : ℕ := if (n = 0) then 0 else Nat.Subtype.ofNat primes_set (n - 1)
 
@@ -34,35 +41,45 @@ by
 def primes_inv (n : ℕ) (n_prime : Nat.Prime n) : ℕ := Nat.find (primes_inv_exists n n_prime)
 def primes_inv_def (n : ℕ) (n_prime : Nat.Prime n) : primes (primes_inv n n_prime) = n :=
 Nat.find_spec (primes_inv_exists n n_prime)
+
+lemma primes_inv_pos (n : ℕ) (n_prime : Nat.Prime n) : 0 < primes_inv n n_prime :=
+by
+  rw [zero_lt_iff]
+  intro h
+  replace h := congrArg primes h
+  rw [primes_inv_def, primes_zero] at h
+  exact n_prime.ne_zero h
+
+lemma primes_prime {n : ℕ} (hn : n > 0) : Nat.Prime (primes n) :=
+by
+  unfold primes
+  rw [if_neg hn.ne']
+  exact Subtype.mem _
+
+def cayley_table (row col : ℕ) : ℤ := primes col - primes row
+
 ```
 
 # **Structure in Prime Gaps -- Formalized**
 
 ## **By Kajani Kaunda and others.**
 
-Structure in Prime Gaps.
+## Structure in Prime Gaps
 
-In this project, we aim to formalize the results presented in the article
-[*Structure in Prime Gaps*](https://www.researchsquare.com/article/rs-4058806/latest)
-using LEAN 4, the latest version of the LEAN proof assistant. By leveraging 
-the capabilities of LEAN 4, we seek to ensure the correctness and 
-robustness of these findings relating to the existence of infinitely many 
-*structured* gaps between prime numbers. This formalization will provide 
-a rigorous foundation for the results and contribute to the broader 
-effort of formalizing mathematics.
+This project formalizes a result from the article [*Structure in Prime Gaps*](https://www.researchsquare.com/article/rs-4058806/latest) using Lean 4, the latest version of the LEAN proof assistant. By utilizing Lean 4's robust proof-checking mechanisms, we ensure the correctness and rigor of the findings related to the existence of infinitely many structured gaps between prime numbers. 
 
-The paper [*Structure in Prime
-Gaps*](https://www.researchsquare.com/article/rs-4058806/latest)
-presents two main results the first of which is the claim that there
-exist structured gaps between primes and the second result is basically
-a corollary or special case of the first. These are stated as follows:
+This formalization contributes to the growing body of work aimed at formalizing mathematical proofs.
 
-> **Theorem 1**: For every prime *p*<sub>α</sub>, there exists infinitely many
+The paper [*Structure in Prime Gaps*](https://www.researchsquare.com/article/rs-4058806/latest) presents two key results:
+
+> 1. **Theorem 1**: For every prime *p*<sub>α</sub>, there exists infinitely many
 > pairs of primes, (*p*<sub>n</sub>, *p*<sub>n+m</sub>), such that (*p*<sub>n+m</sub> − *p*<sub>n</sub>) =
 > *p*<sub>α</sub> − 3, where *n*, *α* ≥ 3, *m* ≥ 1, and *p*<sub>n</sub> is the *n*<sup>th</sup>
 > prime.
 
-> **Theorem 2**: There exist infinitely many pairs of primes with a gap of 2.
+> 2. **Theorem 2**: There exist infinitely many pairs of primes with a gap of 2.
+
+This repository contains the formalization of **Theorem 1** in Lean 4, providing a rigorous foundation for this result. **Theorem 2**, which asserts the existence of infinitely many pairs of primes with a gap of 2, follows directly as a corollary of **Theorem 1** when p<sub>α</sub> is set to 5.
 
 ## A brief visual overview of the results presented in the article *Structure in Prime Gaps*
 
@@ -129,7 +146,7 @@ from which **Theorem 2** is implied as seen in Table 3.
 
 **Outcome and Conclusion**
 
-By formalizing these results, we hope to contribute to the body of 
+By formalizing Theorem 1, we hope to contribute to the body of 
 knowledge in mathematics as well as help establish the use of proof 
 assistants like LEAN in academia, research and industry in general.
 

@@ -2,7 +2,6 @@ import Mathlib
 
 set_option linter.unusedTactic false 
 set_option linter.unusedVariables false 
---set_option diagnostics true
 
 -- ------------------------------------------------------
 -- define the cayley table - infinitely defined
