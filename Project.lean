@@ -91,28 +91,28 @@ structure Beta where
 /-- We now define a function beta_fixed that builds a Beta from a Ds instance by fixing P,
     k, and the corresponding proofs. -/
 noncomputable def beta_fixed 
-  (P₀ : ℕ) (hP₀ : 3 < P₀) (hp₀ : Nat.Prime P₀)
-  (d : Ds ) (hk₀ : ℕ) (hkpos₀ : hk₀ > 0) (hkxy₀ : hk₀ = d.x + ↑d.y) (primeIndex₀ : ℕ)
-  (A_val : ℤ) (h1A : A_val = (P₀ : ℤ) - 3) 
+  (P' : ℕ) (hP' : 3 < P') (hp' : Nat.Prime P')
+  (d : Ds ) (hk' : ℕ) (hkpos' : hk' > 0) (hkxy' : hk' = d.x + ↑d.y) (primeIndex' : ℕ)
+  (A_val : ℤ) (h1A : A_val = (P' : ℤ) - 3) 
   (h2A : A_val = 6 * d.x + 6 * (↑d.y) - 
-                     (if P₀ = 6 * (d.x + ↑d.y) - 1 then 4 else if P₀ = 6 * (d.x + ↑d.y) + 1 then 2 else 0))
-  (h1B : d.B = cayley_table 2 (primeIndex₀ + d.width))
+                     (if P' = 6 * (d.x + ↑d.y) - 1 then 4 else if P' = 6 * (d.x + ↑d.y) + 1 then 2 else 0))
+  (h1B : d.B = cayley_table 2 (primeIndex' + d.width))
   (h2B : d.B = 6 * d.x + 12 * (↑d.y) - 
-                       (if P₀ = 6 * (d.x + ↑d.y) - 1 then 8 else if P₀ = 6 * (d.x + ↑d.y) + 1 then 4 else 0))
-  (h1L : d.L = cayley_table (2 + d.height) (primeIndex₀))
+                       (if P' = 6 * (d.x + ↑d.y) - 1 then 8 else if P' = 6 * (d.x + ↑d.y) + 1 then 4 else 0))
+  (h1L : d.L = cayley_table (2 + d.height) (primeIndex'))
   (h2L : d.L = 6 * d.x)
   (E_val : ℤ) (h1E : E_val = A_val)
   (h2E : E_val = 6 * d.x + 6 * (↑d.y) - 
-                     (if P₀ = 6 * (d.x + ↑d.y) - 1 then 4 else if P₀ = 6 * (d.x + ↑d.y) + 1 then 2 else 0))                   
+                     (if P' = 6 * (d.x + ↑d.y) - 1 then 4 else if P' = 6 * (d.x + ↑d.y) + 1 then 2 else 0))                   
   : Beta :=
 { d          := d,
-  P          := P₀,
-  three_lt_P := hP₀,
-  prime_P    := hp₀,
-  primeIndex := primeIndex₀,
-  k          := hk₀,
-  k_pos      := hkpos₀,
-  k_x_y      := hkxy₀, 
+  P          := P',
+  three_lt_P := hP',
+  prime_P    := hp',
+  primeIndex := primeIndex',
+  k          := hk',
+  k_pos      := hkpos',
+  k_x_y      := hkxy', 
   A          := A_val,
   h1_A       := h1A,
   h2_A       := h2A,
@@ -128,96 +128,96 @@ noncomputable def beta_fixed
 /-- Define a wrapper beta_fixed' that fixes all parameters except the variable data d. -/
 
 noncomputable def beta_fixed' 
-  (P₀ : ℕ) (hP₀ : 3 < P₀) (hp₀ : Nat.Prime P₀)
-  (hk₀ : ℕ) (hkpos₀ : hk₀ > 0) (hkxy₀ : ∀ d : Ds, hk₀ = d.x + ↑d.y) (primeIndex₀ : ℕ)
-  (A_val : ℤ) (h1A : A_val = (P₀ : ℤ) - 3) 
-  (h2A : ∀ d : Ds, A_val = 6 * d.x + 6 * (↑d.y) - (if P₀ = 6 * (d.x + ↑d.y) - 1 then 4 else if P₀ = 6 * (d.x + ↑d.y) + 1 then 2 else 0))
-  (h1B : ∀ d : Ds, d.B = cayley_table 2 (primeIndex₀ + d.width))
+  (P' : ℕ) (hP' : 3 < P') (hp' : Nat.Prime P')
+  (hk' : ℕ) (hkpos' : hk' > 0) (hkxy' : ∀ d : Ds, hk' = d.x + ↑d.y) (primeIndex' : ℕ)
+  (A_val : ℤ) (h1A : A_val = (P' : ℤ) - 3) 
+  (h2A : ∀ d : Ds, A_val = 6 * d.x + 6 * (↑d.y) - (if P' = 6 * (d.x + ↑d.y) - 1 then 4 else if P' = 6 * (d.x + ↑d.y) + 1 then 2 else 0))
+  (h1B : ∀ d : Ds, d.B = cayley_table 2 (primeIndex' + d.width))
   (h2B : ∀ d : Ds, d.B = 6 * d.x + 12 * (↑d.y) - 
-                       (if P₀ = 6 * (d.x + ↑d.y) - 1 then 8 else if P₀ = 6 * (d.x + ↑d.y) + 1 then 4 else 0))
-  (h1L : ∀ d : Ds, d.L = cayley_table (2 + d.height) (primeIndex₀))
+                       (if P' = 6 * (d.x + ↑d.y) - 1 then 8 else if P' = 6 * (d.x + ↑d.y) + 1 then 4 else 0))
+  (h1L : ∀ d : Ds, d.L = cayley_table (2 + d.height) (primeIndex'))
   (h2L : ∀ d : Ds, d.L = 6 * d.x)
 
   (E_val : ℤ) (h1E : E_val = A_val)
   (h2E :  ∀ d : Ds, E_val = 6 * d.x + 6 * (↑d.y) - 
-  (if P₀ = 6 * (d.x + ↑d.y) - 1 then 4 else 
-   if P₀ = 6 * (d.x + ↑d.y) + 1 then 2 else 0))
+  (if P' = 6 * (d.x + ↑d.y) - 1 then 4 else 
+   if P' = 6 * (d.x + ↑d.y) + 1 then 2 else 0))
 
  : Ds → Beta :=
-  fun d => beta_fixed P₀ hP₀ hp₀ d hk₀ hkpos₀ (hkxy₀ d) primeIndex₀ A_val h1A (h2A d) (h1B d) (h2B d) (h1L d) (h2L d) E_val h1E (h2E d)
+  fun d => beta_fixed P' hP' hp' d hk' hkpos' (hkxy' d) primeIndex' A_val h1A (h2A d) (h1B d) (h2B d) (h1L d) (h2L d) E_val h1E (h2E d)
 
 -- ------------------------------------------------------
 /-- Prove that beta_fixed' is injective; that is, if two Beta values built by beta_fixed' are equal,
     then the underlying Ds instances are equal. -/
 theorem beta_fixed'_injective 
-  (P₀ : ℕ) (hP₀ : 3 < P₀) (hp₀ : Nat.Prime P₀)
-  (hk₀ : ℕ) (hkpos₀ : hk₀ > 0) (hkxy₀ : ∀ d : Ds, hk₀ = d.x + ↑d.y)
- (primeIndex₀ : ℕ)
-  (A_val : ℤ) (h1A : A_val = (P₀ : ℤ) - 3) 
-  (h2A : ∀ d : Ds, A_val = 6 * d.x + 6 * (↑d.y) - (if P₀ = 6 * (d.x + ↑d.y) - 1 then 4 else if P₀ = 6 * (d.x + ↑d.y) + 1 then 2 else 0))
-  (h1B : ∀ d : Ds, d.B = cayley_table 2 (primeIndex₀ + d.width))
+  (P' : ℕ) (hP' : 3 < P') (hp' : Nat.Prime P')
+  (hk' : ℕ) (hkpos' : hk' > 0) (hkxy' : ∀ d : Ds, hk' = d.x + ↑d.y)
+ (primeIndex' : ℕ)
+  (A_val : ℤ) (h1A : A_val = (P' : ℤ) - 3) 
+  (h2A : ∀ d : Ds, A_val = 6 * d.x + 6 * (↑d.y) - (if P' = 6 * (d.x + ↑d.y) - 1 then 4 else if P' = 6 * (d.x + ↑d.y) + 1 then 2 else 0))
+  (h1B : ∀ d : Ds, d.B = cayley_table 2 (primeIndex' + d.width))
   (h2B : ∀ d : Ds, d.B = 6 * d.x + 12 * (↑d.y) - 
-                       (if P₀ = 6 * (d.x + ↑d.y) - 1 then 8 else if P₀ = 6 * (d.x + ↑d.y) + 1 then 4 else 0))
-  (h1L : ∀ d : Ds, d.L = cayley_table (2 + d.height) (primeIndex₀))
+                       (if P' = 6 * (d.x + ↑d.y) - 1 then 8 else if P' = 6 * (d.x + ↑d.y) + 1 then 4 else 0))
+  (h1L : ∀ d : Ds, d.L = cayley_table (2 + d.height) (primeIndex'))
   (h2L : ∀ d : Ds, d.L = 6 * d.x)
 
   (E_val : ℤ) (h1E : E_val = A_val)
   (h2E :  ∀ d : Ds, E_val = 6 * d.x + 6 * (↑d.y) - 
-  (if P₀ = 6 * (d.x + ↑d.y) - 1 then 4 else 
-   if P₀ = 6 * (d.x + ↑d.y) + 1 then 2 else 0)) :
-  Function.Injective (beta_fixed' P₀ hP₀ hp₀ hk₀ hkpos₀ 
-  (hkxy₀) primeIndex₀ A_val h1A (h2A) (h1B) (h2B) (h1L) (h2L) E_val h1E (h2E)) :=
+  (if P' = 6 * (d.x + ↑d.y) - 1 then 4 else 
+   if P' = 6 * (d.x + ↑d.y) + 1 then 2 else 0)) :
+  Function.Injective (beta_fixed' P' hP' hp' hk' hkpos' 
+  (hkxy') primeIndex' A_val h1A (h2A) (h1B) (h2B) (h1L) (h2L) E_val h1E (h2E)) :=
 fun d₁ d₂ h => congr_arg Beta.d h
 
 -- ------------------------------------------------------
-/-- Define an injection from Ds into the subtype { b : Beta // b.P = P₀ } by mapping d to
-    ⟨beta_fixed' P₀ ... d, rfl⟩. -/
+/-- Define an injection from Ds into the subtype { b : Beta // b.P = P' } by mapping d to
+    ⟨beta_fixed' P' ... d, rfl⟩. -/
 noncomputable def beta_sub_inj 
-  (P₀ : ℕ) (hP₀ : 3 < P₀) (hp₀ : Nat.Prime P₀)
-  (hk₀ : ℕ) (hkpos₀ : hk₀ > 0) (hkxy₀ : ∀ d : Ds, hk₀ = d.x + ↑d.y)
+  (P' : ℕ) (hP' : 3 < P') (hp' : Nat.Prime P')
+  (hk' : ℕ) (hkpos' : hk' > 0) (hkxy' : ∀ d : Ds, hk' = d.x + ↑d.y)
 
- (primeIndex₀ : ℕ)
-  (A_val : ℤ) (h1A : A_val = (P₀ : ℤ) - 3) 
-  (h2A : ∀ d : Ds, A_val = 6 * d.x + 6 * (↑d.y) - (if P₀ = 6 * (d.x + ↑d.y) - 1 then 4 else if P₀ = 6 * (d.x + ↑d.y) + 1 then 2 else 0))
-  (h1B : ∀ d : Ds, d.B = cayley_table 2 (primeIndex₀ + d.width))
+ (primeIndex' : ℕ)
+  (A_val : ℤ) (h1A : A_val = (P' : ℤ) - 3) 
+  (h2A : ∀ d : Ds, A_val = 6 * d.x + 6 * (↑d.y) - (if P' = 6 * (d.x + ↑d.y) - 1 then 4 else if P' = 6 * (d.x + ↑d.y) + 1 then 2 else 0))
+  (h1B : ∀ d : Ds, d.B = cayley_table 2 (primeIndex' + d.width))
   (h2B : ∀ d : Ds, d.B = 6 * d.x + 12 * (↑d.y) - 
-                       (if P₀ = 6 * (d.x + ↑d.y) - 1 then 8 else if P₀ = 6 * (d.x + ↑d.y) + 1 then 4 else 0))
-  (h1L : ∀ d : Ds, d.L = cayley_table (2 + d.height) (primeIndex₀))
+                       (if P' = 6 * (d.x + ↑d.y) - 1 then 8 else if P' = 6 * (d.x + ↑d.y) + 1 then 4 else 0))
+  (h1L : ∀ d : Ds, d.L = cayley_table (2 + d.height) (primeIndex'))
   (h2L : ∀ d : Ds, d.L = 6 * d.x)
 
   (E_val : ℤ) (h1E : E_val = A_val)
   (h2E :  ∀ d : Ds, E_val = 6 * d.x + 6 * (↑d.y) - 
-  (if P₀ = 6 * (d.x + ↑d.y) - 1 then 4 else 
-   if P₀ = 6 * (d.x + ↑d.y) + 1 then 2 else 0))
-  (d : Ds) : { b : Beta // b.P = P₀ } :=
-⟨ beta_fixed' P₀ hP₀ hp₀ hk₀ hkpos₀ 
-  (hkxy₀) primeIndex₀ A_val h1A (h2A) (h1B) (h2B) (h1L) (h2L) E_val h1E (h2E) d, rfl⟩
+  (if P' = 6 * (d.x + ↑d.y) - 1 then 4 else 
+   if P' = 6 * (d.x + ↑d.y) + 1 then 2 else 0))
+  (d : Ds) : { b : Beta // b.P = P' } :=
+⟨ beta_fixed' P' hP' hp' hk' hkpos' 
+  (hkxy') primeIndex' A_val h1A (h2A) (h1B) (h2B) (h1L) (h2L) E_val h1E (h2E) d, rfl⟩
 
 -- ------------------------------------------------------
 /-- Prove that beta_sub_inj is injective. -/
 theorem beta_sub_inj_injective 
-  (P₀ : ℕ) (hP₀ : 3 < P₀) (hp₀ : Nat.Prime P₀)
-  (hk₀ : ℕ) (hkpos₀ : hk₀ > 0) (hkxy₀ : ∀ d : Ds, hk₀ = d.x + ↑d.y)
+  (P' : ℕ) (hP' : 3 < P') (hp' : Nat.Prime P')
+  (hk' : ℕ) (hkpos' : hk' > 0) (hkxy' : ∀ d : Ds, hk' = d.x + ↑d.y)
 
- (primeIndex₀ : ℕ)
-  (A_val : ℤ) (h1A : A_val = (P₀ : ℤ) - 3) 
-  (h2A : ∀ d : Ds, A_val = 6 * d.x + 6 * (↑d.y) - (if P₀ = 6 * (d.x + ↑d.y) - 1 then 4 else if P₀ = 6 * (d.x + ↑d.y) + 1 then 2 else 0))
-  (h1B : ∀ d : Ds, d.B = cayley_table 2 (primeIndex₀ + d.width))
+ (primeIndex' : ℕ)
+  (A_val : ℤ) (h1A : A_val = (P' : ℤ) - 3) 
+  (h2A : ∀ d : Ds, A_val = 6 * d.x + 6 * (↑d.y) - (if P' = 6 * (d.x + ↑d.y) - 1 then 4 else if P' = 6 * (d.x + ↑d.y) + 1 then 2 else 0))
+  (h1B : ∀ d : Ds, d.B = cayley_table 2 (primeIndex' + d.width))
   (h2B : ∀ d : Ds, d.B = 6 * d.x + 12 * (↑d.y) - 
-                       (if P₀ = 6 * (d.x + ↑d.y) - 1 then 8 else if P₀ = 6 * (d.x + ↑d.y) + 1 then 4 else 0))
-  (h1L : ∀ d : Ds, d.L = cayley_table (2 + d.height) (primeIndex₀))
+                       (if P' = 6 * (d.x + ↑d.y) - 1 then 8 else if P' = 6 * (d.x + ↑d.y) + 1 then 4 else 0))
+  (h1L : ∀ d : Ds, d.L = cayley_table (2 + d.height) (primeIndex'))
   (h2L : ∀ d : Ds, d.L = 6 * d.x)
 
   (E_val : ℤ) (h1E : E_val = A_val)
   (h2E :  ∀ d : Ds, E_val = 6 * d.x + 6 * (↑d.y) - 
-  (if P₀ = 6 * (d.x + ↑d.y) - 1 then 4 else 
-   if P₀ = 6 * (d.x + ↑d.y) + 1 then 2 else 0))
+  (if P' = 6 * (d.x + ↑d.y) - 1 then 4 else 
+   if P' = 6 * (d.x + ↑d.y) + 1 then 2 else 0))
   
   :
-  Function.Injective (beta_sub_inj P₀ hP₀ hp₀ hk₀ hkpos₀ hkxy₀ primeIndex₀ A_val h1A (h2A) (h1B) (h2B) (h1L) (h2L) E_val h1E (h2E)) :=
+  Function.Injective (beta_sub_inj P' hP' hp' hk' hkpos' hkxy' primeIndex' A_val h1A (h2A) (h1B) (h2B) (h1L) (h2L) E_val h1E (h2E)) :=
 
 fun d₁ d₂ h =>
-  beta_fixed'_injective P₀ hP₀ hp₀ hk₀ hkpos₀ hkxy₀ primeIndex₀ A_val h1A (h2A) (h1B) (h2B) (h1L) (h2L) E_val h1E (h2E) (Subtype.ext_iff.mp h)
+  beta_fixed'_injective P' hP' hp' hk' hkpos' hkxy' primeIndex' A_val h1A (h2A) (h1B) (h2B) (h1L) (h2L) E_val h1E (h2E) (Subtype.ext_iff.mp h)
 
 -- ------------------------------------------------------
 /-- An injection from ℕ into Ds is given by mapping n to the Ds instance with all fields set to n+1 (or n+1 for x, width, height). -/
@@ -239,28 +239,28 @@ instance : Infinite Ds :=
   Infinite.of_injective ds_inj ds_inj_injective
 
 -- ------------------------------------------------------
-/-- Since Ds is infinite and beta_sub_inj is injective, the subtype { b : Beta // b.P = P₀ } is infinite. -/
-theorem Beta_fixed_infinite (P₀ : ℕ) (hP₀ : 3 < P₀) (hp₀ : Nat.Prime P₀)
-  (hk₀ : ℕ) (hkpos₀ : hk₀ > 0) (hkxy₀ : ∀ d : Ds, hk₀ = d.x + ↑d.y)
+/-- Since Ds is infinite and beta_sub_inj is injective, the subtype { b : Beta // b.P = P' } is infinite. -/
+theorem Beta_fixed_infinite (P' : ℕ) (hP' : 3 < P') (hp' : Nat.Prime P')
+  (hk' : ℕ) (hkpos' : hk' > 0) (hkxy' : ∀ d : Ds, hk' = d.x + ↑d.y)
 
- (primeIndex₀ : ℕ)
-  (A_val : ℤ) (h1A : A_val = (P₀ : ℤ) - 3) 
-  (h2A : ∀ d : Ds, A_val = 6 * d.x + 6 * (↑d.y) - (if P₀ = 6 * (d.x + ↑d.y) - 1 then 4 else if P₀ = 6 * (d.x + ↑d.y) + 1 then 2 else 0))
-  (h1B : ∀ d : Ds, d.B = cayley_table 2 (primeIndex₀ + d.width))
+ (primeIndex' : ℕ)
+  (A_val : ℤ) (h1A : A_val = (P' : ℤ) - 3) 
+  (h2A : ∀ d : Ds, A_val = 6 * d.x + 6 * (↑d.y) - (if P' = 6 * (d.x + ↑d.y) - 1 then 4 else if P' = 6 * (d.x + ↑d.y) + 1 then 2 else 0))
+  (h1B : ∀ d : Ds, d.B = cayley_table 2 (primeIndex' + d.width))
   (h2B : ∀ d : Ds, d.B = 6 * d.x + 12 * (↑d.y) - 
-                       (if P₀ = 6 * (d.x + ↑d.y) - 1 then 8 else if P₀ = 6 * (d.x + ↑d.y) + 1 then 4 else 0))
-  (h1L : ∀ d : Ds, d.L = cayley_table (2 + d.height) (primeIndex₀))
+                       (if P' = 6 * (d.x + ↑d.y) - 1 then 8 else if P' = 6 * (d.x + ↑d.y) + 1 then 4 else 0))
+  (h1L : ∀ d : Ds, d.L = cayley_table (2 + d.height) (primeIndex'))
   (h2L : ∀ d : Ds, d.L = 6 * d.x)
 
   (E_val : ℤ) (h1E : E_val = A_val)
   (h2E :  ∀ d : Ds, E_val = 6 * d.x + 6 * (↑d.y) - 
-  (if P₀ = 6 * (d.x + ↑d.y) - 1 then 4 else 
-   if P₀ = 6 * (d.x + ↑d.y) + 1 then 2 else 0))
+  (if P' = 6 * (d.x + ↑d.y) - 1 then 4 else 
+   if P' = 6 * (d.x + ↑d.y) + 1 then 2 else 0))
  
   :
-  Infinite { b : Beta // b.P = P₀ } :=
-Infinite.of_injective (fun d : Ds => ⟨ beta_fixed' P₀ hP₀ hp₀ hk₀ hkpos₀ (hkxy₀) primeIndex₀ A_val h1A (h2A) (h1B) (h2B) (h1L) (h2L) E_val h1E (h2E) d, rfl⟩)
-  (beta_sub_inj_injective P₀ hP₀ hp₀ hk₀ hkpos₀ hkxy₀ 
-  primeIndex₀ A_val h1A (h2A) (h1B) (h2B) (h1L) (h2L) E_val h1E (h2E))
+  Infinite { b : Beta // b.P = P' } :=
+Infinite.of_injective (fun d : Ds => ⟨ beta_fixed' P' hP' hp' hk' hkpos' (hkxy') primeIndex' A_val h1A (h2A) (h1B) (h2B) (h1L) (h2L) E_val h1E (h2E) d, rfl⟩)
+  (beta_sub_inj_injective P' hP' hp' hk' hkpos' hkxy' 
+  primeIndex' A_val h1A (h2A) (h1B) (h2B) (h1L) (h2L) E_val h1E (h2E))
 
 -- ------------------------------------------------------
