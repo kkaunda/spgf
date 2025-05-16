@@ -1,7 +1,5 @@
 # STRUCTURE IN PRIME GAPS - FORMALIZED
 
-## PROJECT PROPOSAL
-
 ## prepared for: https://leanprover.zulipchat.com/
 
 ## prepared by: KAJANI KAUNDA
@@ -62,7 +60,7 @@ def cayley_table (row col : ℕ) : ℤ := primes col - primes row
 
 # **Structure in Prime Gaps -- Formalized**
 
-## **By Kajani Kaunda and others.**
+## **By Kajani Kaunda.**
 
 ## Structure in Prime Gaps
 
@@ -79,7 +77,7 @@ The paper [*Structure in Prime Gaps*](https://www.researchsquare.com/article/rs-
 
 > 2. **Theorem 2**: There exist infinitely many pairs of primes with a gap of 2.
 
-This repository contains the formalization of **Theorem 1** in Lean 4, providing a rigorous foundation for this result. **Theorem 2**, which asserts the existence of infinitely many pairs of primes with a gap of 2, follows directly as a corollary of **Theorem 1** when p<sub>α</sub> is set to 5.
+This repository contains the formalization of **Theorem 1** in Lean 4. **Theorem 2**, which asserts the existence of infinitely many pairs of primes with a gap of 2, follows directly as a corollary of **Theorem 1** when p<sub>α</sub> is set to 5.
 
 ## A brief visual overview of the results presented in the article *Structure in Prime Gaps*
 
@@ -98,7 +96,7 @@ from which **Theorem 2** is implied as seen in Table 3.
 
 -   Every sub-array *TT*<sub>i</sub>, defines two pairs of primes. In Table 2,
     the *First pair* is (3, *p*<sub>α</sub>) or (3, 23) and the *Second pair* is
-    (((*B* + 3) + 0 -- *E*), (*B* + 3)) or (11, 31). We can denote the
+    (((*B* + 3) + 0 - *E*), (*B* + 3)) or (11, 31). We can denote the
     integers 11 and 31 in the *Second pair* using the variables *Q*<sub>i</sub>
     and *R*<sub>i</sub> respectively.
 
@@ -144,11 +142,51 @@ from which **Theorem 2** is implied as seen in Table 3.
 
   -----------------------------------------------------------------------
 
-**Outcome and Conclusion**
+**Conclusion**
 
-By formalizing Theorem 1, we hope to contribute to the body of 
+By formalizing these results, we hope to contribute to the body of 
 knowledge in mathematics as well as help establish the use of proof 
 assistants like LEAN in academia, research and industry in general.
+
+## Implication for the Twin Prime Conjecture
+
+The formalization in Lean 4 establishes that for any fixed prime `P' > 3`, the subtype
+
+```
+{b : Beta // b.P = P'}
+```
+
+is infinite. This means that for every such prime `P'`, there are infinitely many distinct values of
+
+```
+b : Beta
+```
+
+with fixed `P = P'`, and each such `b` encodes a structured 4-tuple `(A, B, L, E)` satisfying
+
+```
+(B + 3) - ((B + 3) - E) = (A + 3) - 3 = P' - 3.
+```
+
+In particular, when we set `P' = 5`, the structured difference becomes `2`, and the above expression reduces to:
+
+```
+E = 2
+```
+
+This gives rise to infinitely many prime pairs of the form:
+
+```
+(B + 1, B + 3)
+```
+
+which is just `(p, p + 2)`—the standard twin prime form.
+
+### Therefore:
+
+> **The formalization of Theorem 1 in Lean 4 directly implies the twin prime conjecture** as a corollary by specializing to the case `P' = 5`.
+
+This allows us to assert that the present work also constitutes a formalization, within Lean 4, of the **Twin Prime Conjecture**.
 
 **Source References**
 
