@@ -58,7 +58,7 @@ def cayley_table (row col : ℕ) : ℤ := primes col - primes row
 
 ```
 
-# **Structure in Prime Gaps -- Formalized**
+# **Structure in Prime Gaps - Formalized**
 
 ## **By Kajani Kaunda.**
 
