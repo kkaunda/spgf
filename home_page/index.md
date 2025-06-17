@@ -189,6 +189,8 @@ This allows us to assert that the present work also constitutes a formalization,
 
 ## Code & Build Instructions
 
+The file **`Project.lean`** at the root of [https://github.com/kkaunda/spgf](https://github.com/kkaunda/spgf) is the only fully self-contained Lean 4 project. A reader may verify it using one of the following methods:
+
 ### Method A: Using the Lean 4 Web Playground
 
 1. Visit [https://live.lean-lang.org/](https://live.lean-lang.org/)
@@ -200,16 +202,16 @@ This allows us to assert that the present work also constitutes a formalization,
 To build and run the project locally, use the following commands:
 
 ```
-git clone https://github.com/kkaunda/spgf.git  
-cd spgf  
+git clone https://github.com/kkaunda/spgf.git
+cd spgf
 lake env lean Project.lean
-```
+````
 
-This will download Mathlib4 (if necessary), compile, and type‑check the file.
+This will download Mathlib4 (if necessary), compile, and type-check the file.
 
 ### Method C: Manual Execution with Lean CLI
 
-If one already has Lean 4 and Mathlib4 installed, simply run:
+If Lean 4 and Mathlib4 are already installed, simply run:
 
 ```
 lake env lean Project.lean
