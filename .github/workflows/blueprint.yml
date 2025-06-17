@@ -31,6 +31,11 @@ jobs:
       - name: Build project
         run: ~/.elan/bin/lake build Project
 
+      - name: Add doc-gen4 (GitHub only)
+        run: |
+          ~/.elan/bin/lake add «doc-gen4» https://github.com/leanprover/doc-gen4
+          ~/.elan/bin/lake update «doc-gen4»
+
       - name: Cache mathlib API docs
         uses: actions/cache@v4
         with:
