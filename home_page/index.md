@@ -187,6 +187,34 @@ which is just `(p, p + 2)`—the standard twin prime form.
 
 This allows us to assert that the present work also constitutes a formalization, within Lean 4, of the **Twin Prime Conjecture**.
 
+## Code & Build Instructions
+
+### Method A: Using the Lean 4 Web Playground
+
+1. Visit [https://live.lean-lang.org/](https://live.lean-lang.org/)
+2. Paste the contents of `Project.lean` into the editor
+3. Refresh the page to type-check the Lean code.
+
+### Method B: Local Build with Lake
+
+To build and run the project locally, use the following commands:
+
+```
+git clone https://github.com/kkaunda/spgf.git  
+cd spgf  
+lake env lean Project.lean
+```
+
+This will download Mathlib4 (if necessary), compile, and type‑check the file.
+
+### Method C: Manual Execution with Lean CLI
+
+If one already has Lean 4 and Mathlib4 installed, simply run:
+
+```
+lake env lean Project.lean
+```
+
 **Source References**
 
 **Useful Links**

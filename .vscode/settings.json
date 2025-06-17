@@ -1,4 +1,8 @@
 {
+    "lean4.path": "lake",
+    "lean4.lake.path": "lake",
+    "lean4.lake.enabled": true,
+
     // Configure editor to insert spaces when pressing Tab
     "editor.insertSpaces": true,
     // Set the number of spaces per tab
@@ -15,4 +19,4 @@
     "files.trimFinalNewlines": true,
     // Remove any trailing whitespace on save
     "files.trimTrailingWhitespace": true
-}
+
