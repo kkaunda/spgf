@@ -1,4 +1,4 @@
-# STRUCTURE IN PRIME GAPS - FORMALIZED
+# STRUCTURE IN PRIME GAPS - FORMALIZED 
 
 ## prepared for: https://leanprover.zulipchat.com/
 
